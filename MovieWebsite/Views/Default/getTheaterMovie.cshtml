@@ -1,0 +1,25 @@
+﻿@model List<MovieWebsite.Models.Movie>
+<div id="tab1" class="tab active">
+    <div class="row">
+        <div class="slick-multiItem">
+            @foreach (var movie in Model)
+            {
+                <div class="slide-it">
+                    <div class="movie-item">
+                        <div class="mv-img">
+                            <img src="Content/images/uploads/@movie.Wallpaper" alt="" width="185" height="284">
+                        </div>
+                        <div class="hvr-inner">
+                            <a href="moviesingle.html"> Read more <i class="ion-android-arrow-dropright"></i> </a>
+                        </div>
+                        <div class="title-in">
+                            <h6><a href="#">@movie.Name</a></h6>
+                            <p><i class="ion-android-star"></i><span>@movie.Score</span> /10</p>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+</div>
