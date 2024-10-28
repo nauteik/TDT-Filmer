@@ -1,0 +1,127 @@
+﻿@model MovieWebsite.Models.News
+
+@{
+    ViewBag.Title = Model.Title;
+}
+<div class="hero common-hero">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                @*<div class="hero-ct">
+                        <h1> new list</h1>
+                        <ul class="breadcumb">
+                            <li class="active"><a href="#">Home</a></li>
+                            <li> <span class="ion-ios-arrow-right"></span> news</li>
+                        </ul>
+                    </div>*@
+            </div>
+        </div>
+    </div>
+</div>
+<div style="margin-top: -190px;" class="page-single">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9 col-sm-12 col-xs-12">
+                <div class="blog-detail-ct">
+                    <h1>@Model.Title</h1>
+                    <span style="font-size: 15px;" class="time">@Model.InitDate.Value.ToString("d MMM yyyy")</span>
+                    <img style="display: block;margin: 30px auto;" src="/Content/images/uploads/@Model.Wallpaper" alt="">
+                    <p>@Model.Content</p>
+                    <!-- share link -->
+                    <div class="flex-it share-tag">
+                        <div class="social-link">
+                            <h4>Share it</h4>
+                            <a href="#"><i class="ion-social-facebook"></i></a>
+                            <a href="#"><i class="ion-social-twitter"></i></a>
+                            <a href="#"><i class="ion-social-googleplus"></i></a>
+                            <a href="#"><i class="ion-social-pinterest"></i></a>
+                            <a href="#"><i class="ion-social-linkedin"></i></a>
+                        </div>
+                    </div>
+                    <!-- comment items -->
+                    <div class="comments">
+                        @{
+                            int totalComments = 0;
+                            foreach (var comment in Model.NewComments)
+                            {
+                                totalComments += 1 + comment.NewCommentReplies.Count;
+                            }
+                        }
+                        <h4>@totalComments.ToString("D2") Comments</h4>
+                        @foreach (var comment in Model.NewComments)
+                        {
+                            <div class="cmt-item flex-it">
+                                <img style="width: 70px; height: 70px;" src="/Content/images/uploads/@comment.User.Avatar" alt="">
+                                <div class="author-infor">
+                                    <div class="flex-it2">
+                                        <h6><a href="#">@($"{comment.User.FirstName} {comment.User.LastName}")</a></h6> <span class="time"> - @comment.InitDate.Value.ToString("dd MMM yyyy")</span>
+                                    </div>
+                                    <p>@comment.Content</p>
+                                    <p><a class="rep-btn" href="#">+ Reply</a></p>
+                                </div>
+                            </div>
+                            foreach (var reply in comment.NewCommentReplies)
+                            {
+                                <div class="cmt-item flex-it reply">
+                                    <img src="/Content/images/uploads/@reply.User.Avatar" alt="">
+                                    <div class="author-infor">
+                                        <div class="flex-it2">
+                                            <h6><a href="#">@($"{reply.User.FirstName} {reply.User.LastName}")</a></h6> <span class="time"> - 27 Mar 2017</span>
+                                        </div>
+                                        <p>@reply.Content</p>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+                    <div class="comment-form">
+                        <h4>Leave a comment</h4>
+                        <form action="#">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <input type="text" placeholder="Your name">
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="text" placeholder="Your email">
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="text" placeholder="Website">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <textarea name="message" id="" placeholder="Message"></textarea>
+                                </div>
+                            </div>
+                            <input class="submit" type="submit" placeholder="submit">
+                        </form>
+                    </div>
+                    <!-- comment form -->
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-12 col-xs-12">
+                <div class="sidebar">
+                    <div class="searh-form">
+                        <h4 class="sb-title">Search</h4>
+                        <form class="form-style-1 celebrity-form" action="/new">
+                            <div class="row">
+                                <div class="col-md-12 form-it">
+                                    <label>Keyword</label>
+                                    <input name="keyword" type="text" placeholder="Enter keywords">
+                                </div>
+                                <div class="col-md-12 ">
+                                    <input class="submit" type="submit" value="SEARCH">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    @Html.Action("PopularNews", "New");
+                    <div class="ads">
+                        <img src="/Content/images/uploads/ads1.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,18 +1,18 @@
 //preloading for page
-$(window).on('load', function() { // makes sure the whole site is loaded 
-	var status = $('#status');
-	var preloader = $('#preloader');
-	var body = $('body');
-	status.fadeOut(); // will first fade out the loading animation 
-	preloader.delay(0).fadeOut('fast'); // will fade out the white DIV that covers the website. 
-	body.delay(0).css({'overflow':'visible'});
-	var vidDefer = document.getElementsByTagName('iframe');
-	for (var i=0; i<vidDefer.length; i++) {
-		if(vidDefer[i].getAttribute('data-src')) {
-			vidDefer[i].setAttribute('src',vidDefer[i].getAttribute('data-src'));
-		} 
-	}
-})
+//$(window).on('load', function() { // makes sure the whole site is loaded 
+//	var status = $('#status');
+//	var preloader = $('#preloader');
+//	var body = $('body');
+//	status.fadeOut(); // will first fade out the loading animation 
+//	preloader.delay(0).fadeOut('fast'); // will fade out the white DIV that covers the website. 
+//	body.delay(0).css({'overflow':'visible'});
+//	var vidDefer = document.getElementsByTagName('iframe');
+//	for (var i=0; i<vidDefer.length; i++) {
+//		if(vidDefer[i].getAttribute('data-src')) {
+//			vidDefer[i].setAttribute('src',vidDefer[i].getAttribute('data-src'));
+//		} 
+//	}
+//})
 $(function(){
 	'use strict';
 	// js for dropdown menu
@@ -51,7 +51,7 @@ $(function(){
 	var tabsClick = $('.tabs .tab-links a, .tab-links-2 a, .tab-links-3 a');
 	var multiItem = $('.slick-multiItem');
 	var multiItem2 = $('.slick-multiItem2');
-	tabsClick.on('click', function(e)  {
+	tabsClick.on('click', function (e) {
 		var currentAttrValue = $(this).attr('href');
 		var tabsCurrent = $('.tabs ' + currentAttrValue);
 		// Show/Hide Tabs
@@ -188,6 +188,14 @@ $(function(){
 	      }
 	    }
 	  ]
+	});
+	
+	$('.mv-img').on('click', function () {
+		if ($(this).attr('id') === 'topSlider') {
+			// If it has the id, redirect to the href attribute of the nested <a> element
+			var url = $(this).find('a').attr('href');
+			window.location.href = url;
+		}
 	});
 	//main slider home 1
 	var multiItemSlider = $('.slick-multiItemSlider');
@@ -447,10 +455,31 @@ $(function(){
 	var loginct = $( "#login-content" );
 	var signupct= $("#signup-content");
 	var loginWrap = $(".login-wrapper");
+	var trailerWrap = $(".trailer-wrapper");
+	var trailerLink = $("#trailer-link");
 	var overlay = $(".overlay");
+	trailerWrap.each(function () {
+		$(this).wrap('<div class="overlay"></div>')
+	});
+	trailerLink.on('click', function (event) {
+		event.preventDefault();
+		trailerWrap.parents(overlay).addClass("openform");
+		$(document).on('click', function (e) {
+			var target = $(e.target);
+			if ($(target).hasClass("overlay")) {
+				$(target).find(trailerWrap).each(function () {
+					$(this).removeClass("openform");
+				});
+				setTimeout(function () {
+					$(target).removeClass("openform");
+				}, 350);
+			}
+		});
+	});
 	loginWrap.each( function(){
 		$(this).wrap('<div class="overlay"></div>')
 	});
+
 	//pop up for login form
     loginLink.on('click', function(event){
     	event.preventDefault();

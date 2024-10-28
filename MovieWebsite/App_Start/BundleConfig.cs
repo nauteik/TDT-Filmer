@@ -21,11 +21,11 @@ namespace MovieWebsite
 
             bundles.Add(new Bundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js"));
-            bundles.Add(new Bundle("~/Scripts/js").Include(
-                       "~/Scripts/js/custom.js",
-                       "~/Scripts/js/jquery.js",
-                       "~/Scripts/js/plugins.js",
-                       "~/Scripts/js/plugins2.js"));
+            bundles.Add(new Bundle("~/Scripts").Include(
+                       "~/Scripts/custom.js",
+                       "~/Scripts/jquery.js",
+                       "~/Scripts/plugins.js",
+                       "~/Scripts/plugins2.js"));
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       
                       "~/Content/site.css",

@@ -1,0 +1,140 @@
+﻿@model List<MovieWebsite.Models.Movie>
+@{
+    ViewBag.Title = "Danh sách phim";
+    int totalMovie = ViewBag.TotalMovies;
+}
+<div class="hero common-hero">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="hero-ct">
+                    <h1>MOVIE LIST</h1>
+                    <ul class="breadcumb">
+                        <li class="active"><a href="/">HOME</a></li>
+                        <li> <span class="ion-ios-arrow-right"></span> MOVIE</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="page-single">
+    <div class="container">
+        <div class="row ipad-width">
+            <div class="col-md-8 col-sm-12 col-xs-12">
+                <div style="padding: 8px;" class="topbar-filter">
+                    <p>Found <span>@totalMovie movies</span> in total</p>
+                    
+                </div>
+                <div class="flex-wrap-movielist">
+                    @{
+                        foreach (var movie in Model)
+                        {
+                            <div class="movie-item-style-2 movie-item-style-1">
+                                <img style="width: 170px; height: 261px;" src="/Content/images/uploads/@movie.Wallpaper" alt="">
+                                <div class="hvr-inner">
+                                    <a href="/movie/@movie.Meta"> MORE DETAIL <i class="ion-android-arrow-dropright"></i> </a>
+                                </div>
+                                <div class="mv-item-infor">
+                                    <h6><a href="#">@movie.Name</a></h6>
+                                    <p class="rate"><i class="ion-android-star"></i><span>@($"{movie.Score:F1}")</span> /10</p>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+                <div class="topbar-filter">
+                    @Html.Action("MoviePagination", "Movie", new { currPage = ViewBag.Page, totalPages = ViewBag.PageCount})
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-12 col-xs-12">
+                <div class="sidebar">
+                    <div class="searh-form">
+                        <h4 class="sb-title">Search for movie</h4>
+                        <form class="form-style-1" method="get" action="/movie">
+                            <div class="row">
+                                <div class="col-md-12 form-it">
+                                    <label>Movie name</label>
+                                    <input name="movieName" type="text" placeholder="Enter keywords">
+                                </div>
+                                <div class="col-md-12 form-it">
+                                    <label>Genres & Subgenres</label>
+                                    <div class="group-ip">
+                                        <select name="category" class="form-it form-select">
+                                            <option value="">Select a genre</option>
+                                            <option value="sci-fi">SCI-FI</option>
+                                            <option value="action">ACTION</option>
+                                            <option value="advanture">ADVANTURE</option>
+                                            <option value="thriller">THRILLER</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 form-it">
+                                    <label>Release Year</label>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <select name="fromYear" style="max-height: 150px; overflow-y: auto;">
+                                                <option value="">Select year</option>
+                                                <option value="2024">2024</option>
+                                                <option value="2023">2023</option>
+                                                <option value="2022">2022</option>
+                                                <option value="2021">2021</option>
+                                                <option value="2020">2020</option>
+                                                <option value="2019">2019</option>
+                                                <option value="2018">2018</option>
+                                                <option value="2017">2017</option>
+                                                <option value="2016">2016</option>
+                                                <option value="2015">2015</option>
+                                                <option value="2014">2014</option>
+                                                <option value="2013">2013</option>
+                                                <option value="2012">2012</option>
+                                                <option value="2011">2011</option>
+                                                <option value="2010">2010</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <select name="toYear" style="max-height: 150px; overflow-y: auto;">
+                                                <option value="" selected>Select year</option>
+                                                <option value="2024">2024</option>
+                                                <option value="2023">2023</option>
+                                                <option value="2022">2022</option>
+                                                <option value="2021">2021</option>
+                                                <option value="2020">2020</option>
+                                                <option value="2019">2019</option>
+                                                <option value="2018">2018</option>
+                                                <option value="2017">2017</option>
+                                                <option value="2016">2016</option>
+                                                <option value="2015">2015</option>
+                                                <option value="2014">2014</option>
+                                                <option value="2013">2013</option>
+                                                <option value="2012">2012</option>
+                                                <option value="2011">2011</option>
+                                                <option value="2010">2010</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 form-it">
+                                    <label>Sort by</label>
+                                    <div class="group-ip">
+                                        <select name="sort" class="form-it form-select">
+                                            <option value="">Select sort type</option>
+                                            <option value="rating">Sort by Rating</option>
+                                            <option value="year">Sort by Release Year</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 ">
+                                    <input class="submit" type="submit" value="submit">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="ads">
+                        <img src="/Content/images/uploads/ads1.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

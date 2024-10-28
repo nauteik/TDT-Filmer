@@ -1,0 +1,14 @@
+﻿@model List<MovieWebsite.Models.News>
+<div class="sb-recentpost sb-it">
+    <h4 class="sb-title">most popular</h4>
+    @{
+        int i = 1;
+    }
+    @foreach (var new_instance in Model)
+    {
+        <div class="recent-item">
+            <span>0@(i++);</span><h6><a href="/new/@new_instance.Meta">@new_instance.Title</a></h6>
+        </div>
+    }
+</div>
+

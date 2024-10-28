@@ -12,23 +12,17 @@ namespace MovieWebsite.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Menu
+    public partial class SubMenu
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Menu()
-        {
-            this.SubMenus = new HashSet<SubMenu>();
-        }
-    
-        public int id { get; set; }
+        public int Id { get; set; }
+        public Nullable<int> ParentId { get; set; }
         public string Name { get; set; }
         public string Link { get; set; }
         public string Meta { get; set; }
         public Nullable<bool> Hide { get; set; }
-        public Nullable<int> C_Order { get; set; }
+        public Nullable<int> C_ORDER { get; set; }
         public Nullable<System.DateTime> InitDate { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SubMenu> SubMenus { get; set; }
+        public virtual Menu Menu { get; set; }
     }
 }

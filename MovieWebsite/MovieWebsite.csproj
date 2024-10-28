@@ -183,12 +183,19 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CelebController.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MovieController.cs" />
+    <Compile Include="Controllers\NewController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CastViewModel.cs" />
     <Compile Include="Models\Celebrity.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Genre.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Menu.cs">
@@ -212,7 +219,30 @@
     <Compile Include="Models\Movie.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\MovieCast.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MovieReview.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\NewComment.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\NewCommentReply.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\News.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SubMenu.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\User.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\GenreColor.cs" />
+    <Compile Include="Utilities\TimeService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -257,10 +287,6 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\js\custom.js" />
-    <Content Include="Scripts\js\jquery.js" />
-    <Content Include="Scripts\js\plugins.js" />
-    <Content Include="Scripts\js\plugins2.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\plugins.js" />
     <Content Include="Scripts\plugins2.js" />
@@ -280,11 +306,25 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_MyLayout.cshtml" />
     <Content Include="Views\Default\getMenu.cshtml" />
-    <Content Include="Views\Default\getMovie.cshtml" />
     <Content Include="Views\Default\getOnTVMovie.cshtml" />
     <Content Include="Views\Default\getTheaterMovie.cshtml" />
     <Content Include="Views\Default\getCeleb.cshtml" />
     <Content Include="Views\Default\getSlider.cshtml" />
+    <Content Include="Views\Default\GetNews.cshtml" />
+    <Content Include="Views\Default\GetTrailer.cshtml" />
+    <Content Include="Views\Movie\Index.cshtml" />
+    <Content Include="Views\Movie\Detail.cshtml" />
+    <Content Include="Views\Home\NotFound.cshtml" />
+    <Content Include="Views\Celeb\Detail.cshtml" />
+    <Content Include="Views\Celeb\Cast.cshtml" />
+    <Content Include="Views\Celeb\CelebList.cshtml" />
+    <Content Include="Views\Movie\MoviePagination.cshtml" />
+    <Content Include="Views\Celeb\CelebPagination.cshtml" />
+    <Content Include="Views\New\NewList.cshtml" />
+    <Content Include="Views\New\NewPagination.cshtml" />
+    <Content Include="Views\New\NewDetail.cshtml" />
+    <Content Include="Views\New\PopularNews.cshtml" />
+    <Content Include="Views\Default\GetFooter.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

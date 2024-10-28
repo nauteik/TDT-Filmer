@@ -1,0 +1,41 @@
+﻿@model List<MovieWebsite.Models.Movie>
+<div class="trailers">
+    <div class="container">
+        <div class="row ipad-width">
+            <div class="col-md-12">
+                <div class="title-hd">
+                    <h2>in theater</h2>
+                    <a href="#" class="viewall">View all <i class="ion-ios-arrow-right"></i></a>
+                </div>
+                <div class="videos">
+                    <div class="slider-for-2 video-ft">
+                        @foreach (var movie in Model)
+                        {
+                            <div>
+                                <iframe class="item-video" src="@movie.Trailer" data-src="@movie.Trailer"></iframe>
+                            </div>
+                        }
+                    </div>
+                    <div class="slider-nav-2 thumb-ft">
+                        @foreach (var movie in Model)
+                        {
+                            <div class="item">
+                                <div class="trailer-img">
+                                    @{
+                                        string youtube_video_id = movie.Trailer.Substring(movie.Trailer.LastIndexOf('/') + 1);
+                                        <img src="https://img.youtube.com/vi/@youtube_video_id/hqdefault.jpg" alt="photo by Barn Images" width="4096" height="2737">
+                                    }
+                                </div>
+                                <div class="trailer-infor">
+                                    <h4 class="desc">@movie.Name</h4>
+                                    <p>2:30</p>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

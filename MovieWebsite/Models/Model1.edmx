@@ -10,9 +10,26 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="NAME" Type="nvarchar" MaxLength="255" />
+          <Property Name="Name" Type="nvarchar" MaxLength="255" />
           <Property Name="Avatar" Type="varchar" MaxLength="255" />
           <Property Name="Role" Type="nvarchar" MaxLength="255" />
+          <Property Name="Country" Type="nvarchar" MaxLength="255" />
+          <Property Name="Bio" Type="nvarchar(max)" />
+          <Property Name="FulBio" Type="nvarchar(max)" />
+          <Property Name="Height" Type="int" />
+          <Property Name="Birth" Type="date" />
+          <Property Name="Meta" Type="varchar" MaxLength="255" />
+          <Property Name="Hide" Type="bit" />
+          <Property Name="_ORDER" Type="int" />
+          <Property Name="InitDate" Type="date" />
+          <Property Name="CastImage" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Genre">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="255" />
           <Property Name="Meta" Type="varchar" MaxLength="255" />
           <Property Name="Hide" Type="bit" />
           <Property Name="_ORDER" Type="int" />
@@ -38,16 +55,324 @@
           <Property Name="Name" Type="nvarchar" MaxLength="255" />
           <Property Name="Wallpaper" Type="varchar" MaxLength="255" />
           <Property Name="Score" Type="decimal" Precision="1" Scale="0" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" />
+          <Property Name="Summary" Type="nvarchar(max)" />
+          <Property Name="Trailer" Type="nvarchar" MaxLength="255" />
+          <Property Name="ReleaseDate" Type="date" />
+          <Property Name="RunTime" Type="int" />
           <Property Name="Meta" Type="varchar" MaxLength="255" />
           <Property Name="Hide" Type="bit" />
           <Property Name="_ORDER" Type="int" />
           <Property Name="InitDate" Type="date" />
-          <Property Name="Type" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="MovieCast">
+          <Key>
+            <PropertyRef Name="MovieId" />
+            <PropertyRef Name="CelebId" />
+          </Key>
+          <Property Name="MovieId" Type="int" Nullable="false" />
+          <Property Name="CelebId" Type="int" Nullable="false" />
+          <Property Name="Role" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="MovieGenre">
+          <Key>
+            <PropertyRef Name="MovieId" />
+            <PropertyRef Name="GenreId" />
+          </Key>
+          <Property Name="MovieId" Type="int" Nullable="false" />
+          <Property Name="GenreId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MovieReview">
+          <Key>
+            <PropertyRef Name="MovieId" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="MovieId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="Content" Type="nvarchar(max)" />
+          <Property Name="Score" Type="int" />
+          <Property Name="Meta" Type="varchar" MaxLength="255" />
+          <Property Name="Hide" Type="bit" />
+          <Property Name="_ORDER" Type="int" />
+          <Property Name="InitDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="NewComment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NewId" Type="int" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="Content" Type="nvarchar(max)" />
+          <Property Name="Meta" Type="varchar" MaxLength="255" />
+          <Property Name="Hide" Type="bit" />
+          <Property Name="_ORDER" Type="int" />
+          <Property Name="InitDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="NewCommentReply">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NewCommentId" Type="int" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="Content" Type="nvarchar(max)" />
+          <Property Name="Meta" Type="varchar" MaxLength="255" />
+          <Property Name="Hide" Type="bit" />
+          <Property Name="_ORDER" Type="int" />
+          <Property Name="InitDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="News">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="255" />
+          <Property Name="Image" Type="varchar" MaxLength="255" />
+          <Property Name="Content" Type="text" />
+          <Property Name="Meta" Type="varchar" MaxLength="255" />
+          <Property Name="Hide" Type="bit" />
+          <Property Name="_ORDER" Type="int" />
+          <Property Name="InitDate" Type="datetime" />
+          <Property Name="Wallpaper" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="SubMenu">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ParentId" Type="int" />
+          <Property Name="Name" Type="nvarchar" MaxLength="255" />
+          <Property Name="Link" Type="nvarchar" MaxLength="255" />
+          <Property Name="Meta" Type="varchar" MaxLength="255" />
+          <Property Name="Hide" Type="bit" />
+          <Property Name="_ORDER" Type="int" />
+          <Property Name="InitDate" Type="date" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Avatar" Type="varchar" MaxLength="255" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="255" />
+          <Property Name="Country" Type="nvarchar" MaxLength="255" />
+          <Property Name="Meta" Type="varchar" MaxLength="255" />
+          <Property Name="Hide" Type="bit" />
+          <Property Name="_ORDER" Type="int" />
+          <Property Name="InitDate" Type="datetime" />
+        </EntityType>
+        <Association Name="FK__MovieCast__Celeb__5CD6CB2B">
+          <End Role="Celebrity" Type="Self.Celebrity" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="MovieCast" Type="Self.MovieCast" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Celebrity">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MovieCast">
+              <PropertyRef Name="CelebId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MovieCast__Movie__5BE2A6F2">
+          <End Role="Movie" Type="Self.Movie" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="MovieCast" Type="Self.MovieCast" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movie">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MovieCast">
+              <PropertyRef Name="MovieId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MovieGenr__Genre__571DF1D5">
+          <End Role="Genre" Type="Self.Genre" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="MovieGenre" Type="Self.MovieGenre" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genre">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MovieGenre">
+              <PropertyRef Name="GenreId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MovieGenr__Movie__5629CD9C">
+          <End Role="Movie" Type="Self.Movie" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="MovieGenre" Type="Self.MovieGenre" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movie">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MovieGenre">
+              <PropertyRef Name="MovieId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MovieRevi__Movie__693CA210">
+          <End Role="Movie" Type="Self.Movie" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="MovieReview" Type="Self.MovieReview" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movie">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MovieReview">
+              <PropertyRef Name="MovieId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MovieRevi__UserI__6A30C649">
+          <End Role="Users" Type="Self.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="MovieReview" Type="Self.MovieReview" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MovieReview">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__NewCommen__InitD__6FE99F9F">
+          <End Role="News" Type="Self.News" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="NewComment" Type="Self.NewComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="News">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NewComment">
+              <PropertyRef Name="NewId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__NewCommen__InitD__7B5B524B">
+          <End Role="NewComment" Type="Self.NewComment" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="NewCommentReply" Type="Self.NewCommentReply" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NewComment">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NewCommentReply">
+              <PropertyRef Name="NewCommentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__NewCommen__UserI__70DDC3D8">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="NewComment" Type="Self.NewComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NewComment">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__NewCommen__UserI__7C4F7684">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="NewCommentReply" Type="Self.NewCommentReply" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NewCommentReply">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SubMenu__ParentI__7F2BE32F">
+          <End Role="Menu" Type="Self.Menu" Multiplicity="0..1" />
+          <End Role="SubMenu" Type="Self.SubMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SubMenu">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="MovieWebsiteModelStoreContainer">
           <EntitySet Name="Celebrity" EntityType="Self.Celebrity" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Genre" EntityType="Self.Genre" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Movie" EntityType="Self.Movie" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MovieCast" EntityType="Self.MovieCast" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MovieGenre" EntityType="Self.MovieGenre" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MovieReview" EntityType="Self.MovieReview" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NewComment" EntityType="Self.NewComment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NewCommentReply" EntityType="Self.NewCommentReply" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="News" EntityType="Self.News" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SubMenu" EntityType="Self.SubMenu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__MovieCast__Celeb__5CD6CB2B" Association="Self.FK__MovieCast__Celeb__5CD6CB2B">
+            <End Role="Celebrity" EntitySet="Celebrity" />
+            <End Role="MovieCast" EntitySet="MovieCast" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MovieCast__Movie__5BE2A6F2" Association="Self.FK__MovieCast__Movie__5BE2A6F2">
+            <End Role="Movie" EntitySet="Movie" />
+            <End Role="MovieCast" EntitySet="MovieCast" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MovieGenr__Genre__571DF1D5" Association="Self.FK__MovieGenr__Genre__571DF1D5">
+            <End Role="Genre" EntitySet="Genre" />
+            <End Role="MovieGenre" EntitySet="MovieGenre" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MovieGenr__Movie__5629CD9C" Association="Self.FK__MovieGenr__Movie__5629CD9C">
+            <End Role="Movie" EntitySet="Movie" />
+            <End Role="MovieGenre" EntitySet="MovieGenre" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MovieRevi__Movie__693CA210" Association="Self.FK__MovieRevi__Movie__693CA210">
+            <End Role="Movie" EntitySet="Movie" />
+            <End Role="MovieReview" EntitySet="MovieReview" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MovieRevi__UserI__6A30C649" Association="Self.FK__MovieRevi__UserI__6A30C649">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="MovieReview" EntitySet="MovieReview" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NewCommen__InitD__6FE99F9F" Association="Self.FK__NewCommen__InitD__6FE99F9F">
+            <End Role="News" EntitySet="News" />
+            <End Role="NewComment" EntitySet="NewComment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NewCommen__InitD__7B5B524B" Association="Self.FK__NewCommen__InitD__7B5B524B">
+            <End Role="NewComment" EntitySet="NewComment" />
+            <End Role="NewCommentReply" EntitySet="NewCommentReply" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NewCommen__UserI__70DDC3D8" Association="Self.FK__NewCommen__UserI__70DDC3D8">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="NewComment" EntitySet="NewComment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NewCommen__UserI__7C4F7684" Association="Self.FK__NewCommen__UserI__7C4F7684">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="NewCommentReply" EntitySet="NewCommentReply" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SubMenu__ParentI__7F2BE32F" Association="Self.FK__SubMenu__ParentI__7F2BE32F">
+            <End Role="Menu" EntitySet="Menu" />
+            <End Role="SubMenu" EntitySet="SubMenu" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -64,11 +389,60 @@
           <Property Name="Hide" Type="Boolean" />
           <Property Name="C_Order" Type="Int32" />
           <Property Name="InitDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="SubMenus" Relationship="MovieWebsiteModel.FK__SubMenu__ParentI__7F2BE32F" FromRole="Menu" ToRole="SubMenu" />
         </EntityType>
         <EntityContainer Name="MovieWebsiteEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Menus" EntityType="Self.Menu" />
           <EntitySet Name="Movies" EntityType="MovieWebsiteModel.Movie" />
           <EntitySet Name="Celebrities" EntityType="MovieWebsiteModel.Celebrity" />
+          <EntitySet Name="News" EntityType="MovieWebsiteModel.News" />
+          <EntitySet Name="Genres" EntityType="MovieWebsiteModel.Genre" />
+          <AssociationSet Name="MovieGenre" Association="MovieWebsiteModel.MovieGenre">
+            <End Role="Genre" EntitySet="Genres" />
+            <End Role="Movie" EntitySet="Movies" />
+          </AssociationSet>
+          <EntitySet Name="MovieCasts" EntityType="MovieWebsiteModel.MovieCast" />
+          <AssociationSet Name="FK__MovieCast__Celeb__5CD6CB2B" Association="MovieWebsiteModel.FK__MovieCast__Celeb__5CD6CB2B">
+            <End Role="Celebrity" EntitySet="Celebrities" />
+            <End Role="MovieCast" EntitySet="MovieCasts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MovieCast__Movie__5BE2A6F2" Association="MovieWebsiteModel.FK__MovieCast__Movie__5BE2A6F2">
+            <End Role="Movie" EntitySet="Movies" />
+            <End Role="MovieCast" EntitySet="MovieCasts" />
+          </AssociationSet>
+          <EntitySet Name="Users" EntityType="MovieWebsiteModel.User" />
+          <EntitySet Name="MovieReviews" EntityType="MovieWebsiteModel.MovieReview" />
+          <AssociationSet Name="FK__MovieRevi__Movie__693CA210" Association="MovieWebsiteModel.FK__MovieRevi__Movie__693CA210">
+            <End Role="Movie" EntitySet="Movies" />
+            <End Role="MovieReview" EntitySet="MovieReviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MovieRevi__UserI__6A30C649" Association="MovieWebsiteModel.FK__MovieRevi__UserI__6A30C649">
+            <End Role="User" EntitySet="Users" />
+            <End Role="MovieReview" EntitySet="MovieReviews" />
+          </AssociationSet>
+          <EntitySet Name="NewComments" EntityType="MovieWebsiteModel.NewComment" />
+          <AssociationSet Name="FK__NewCommen__InitD__6FE99F9F" Association="MovieWebsiteModel.FK__NewCommen__InitD__6FE99F9F">
+            <End Role="News" EntitySet="News" />
+            <End Role="NewComment" EntitySet="NewComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NewCommen__UserI__70DDC3D8" Association="MovieWebsiteModel.FK__NewCommen__UserI__70DDC3D8">
+            <End Role="User" EntitySet="Users" />
+            <End Role="NewComment" EntitySet="NewComments" />
+          </AssociationSet>
+          <EntitySet Name="NewCommentReplies" EntityType="MovieWebsiteModel.NewCommentReply" />
+          <AssociationSet Name="FK__NewCommen__InitD__7B5B524B" Association="MovieWebsiteModel.FK__NewCommen__InitD__7B5B524B">
+            <End Role="NewComment" EntitySet="NewComments" />
+            <End Role="NewCommentReply" EntitySet="NewCommentReplies" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NewCommen__UserI__7C4F7684" Association="MovieWebsiteModel.FK__NewCommen__UserI__7C4F7684">
+            <End Role="User" EntitySet="Users" />
+            <End Role="NewCommentReply" EntitySet="NewCommentReplies" />
+          </AssociationSet>
+          <EntitySet Name="SubMenus" EntityType="MovieWebsiteModel.SubMenu" />
+          <AssociationSet Name="FK__SubMenu__ParentI__7F2BE32F" Association="MovieWebsiteModel.FK__SubMenu__ParentI__7F2BE32F">
+            <End Role="Menu" EntitySet="Menus" />
+            <End Role="SubMenu" EntitySet="SubMenus" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Movie">
           <Key>
@@ -83,20 +457,279 @@
           <Property Name="C_ORDER" Type="Int32" />
           <Property Name="InitDate" Type="DateTime" Precision="0" />
           <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Trailer" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Summary" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ReleaseDate" Type="DateTime" Precision="0" />
+          <Property Name="RunTime" Type="Int32" />
+          <NavigationProperty Name="Genres" Relationship="MovieWebsiteModel.MovieGenre" FromRole="Movie" ToRole="Genre" />
+          <NavigationProperty Name="MovieCasts" Relationship="MovieWebsiteModel.FK__MovieCast__Movie__5BE2A6F2" FromRole="Movie" ToRole="MovieCast" />
+          <NavigationProperty Name="MovieReviews" Relationship="MovieWebsiteModel.FK__MovieRevi__Movie__693CA210" FromRole="Movie" ToRole="MovieReview" />
         </EntityType>
         <EntityType Name="Celebrity">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NAME" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Avatar" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CastImage" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Role" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Meta" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Hide" Type="Boolean" />
           <Property Name="C_ORDER" Type="Int32" />
           <Property Name="InitDate" Type="DateTime" Precision="0" />
+          <Property Name="Country" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Bio" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FulBio" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Height" Type="Int32" />
+          <Property Name="Birth" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="MovieCasts" Relationship="MovieWebsiteModel.FK__MovieCast__Celeb__5CD6CB2B" FromRole="Celebrity" ToRole="MovieCast" />
         </EntityType>
+        <EntityType Name="News">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Image" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Meta" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Hide" Type="Boolean" />
+          <Property Name="C_ORDER" Type="Int32" />
+          <Property Name="InitDate" Type="DateTime" Precision="3" />
+          <Property Name="Wallpaper" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="NewComments" Relationship="MovieWebsiteModel.FK__NewCommen__InitD__6FE99F9F" FromRole="News" ToRole="NewComment" />
+        </EntityType>
+        <EntityType Name="Genre">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Meta" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Hide" Type="Boolean" />
+          <Property Name="C_ORDER" Type="Int32" />
+          <Property Name="InitDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Movies" Relationship="MovieWebsiteModel.MovieGenre" FromRole="Genre" ToRole="Movie" />
+        </EntityType>
+        <Association Name="MovieGenre">
+          <End Type="MovieWebsiteModel.Genre" Role="Genre" Multiplicity="*" />
+          <End Type="MovieWebsiteModel.Movie" Role="Movie" Multiplicity="*" />
+        </Association>
+        <EntityType Name="MovieCast">
+          <Key>
+            <PropertyRef Name="MovieId" />
+            <PropertyRef Name="CelebId" />
+          </Key>
+          <Property Name="MovieId" Type="Int32" Nullable="false" />
+          <Property Name="CelebId" Type="Int32" Nullable="false" />
+          <Property Name="Role" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Celebrity" Relationship="MovieWebsiteModel.FK__MovieCast__Celeb__5CD6CB2B" FromRole="MovieCast" ToRole="Celebrity" />
+          <NavigationProperty Name="Movie" Relationship="MovieWebsiteModel.FK__MovieCast__Movie__5BE2A6F2" FromRole="MovieCast" ToRole="Movie" />
+        </EntityType>
+        <Association Name="FK__MovieCast__Celeb__5CD6CB2B">
+          <End Type="MovieWebsiteModel.Celebrity" Role="Celebrity" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="MovieWebsiteModel.MovieCast" Role="MovieCast" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Celebrity">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MovieCast">
+              <PropertyRef Name="CelebId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MovieCast__Movie__5BE2A6F2">
+          <End Type="MovieWebsiteModel.Movie" Role="Movie" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="MovieWebsiteModel.MovieCast" Role="MovieCast" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movie">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MovieCast">
+              <PropertyRef Name="MovieId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Avatar" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Country" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Meta" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Hide" Type="Boolean" />
+          <Property Name="C_ORDER" Type="Int32" />
+          <Property Name="InitDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="MovieReviews" Relationship="MovieWebsiteModel.FK__MovieRevi__UserI__6A30C649" FromRole="User" ToRole="MovieReview" />
+          <NavigationProperty Name="NewComments" Relationship="MovieWebsiteModel.FK__NewCommen__UserI__70DDC3D8" FromRole="User" ToRole="NewComment" />
+          <NavigationProperty Name="NewCommentReplies" Relationship="MovieWebsiteModel.FK__NewCommen__UserI__7C4F7684" FromRole="User" ToRole="NewCommentReply" />
+        </EntityType>
+        <EntityType Name="MovieReview">
+          <Key>
+            <PropertyRef Name="MovieId" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="MovieId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Score" Type="Int32" />
+          <Property Name="Meta" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Hide" Type="Boolean" />
+          <Property Name="C_ORDER" Type="Int32" />
+          <Property Name="InitDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Movie" Relationship="MovieWebsiteModel.FK__MovieRevi__Movie__693CA210" FromRole="MovieReview" ToRole="Movie" />
+          <NavigationProperty Name="User" Relationship="MovieWebsiteModel.FK__MovieRevi__UserI__6A30C649" FromRole="MovieReview" ToRole="User" />
+        </EntityType>
+        <Association Name="FK__MovieRevi__Movie__693CA210">
+          <End Type="MovieWebsiteModel.Movie" Role="Movie" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="MovieWebsiteModel.MovieReview" Role="MovieReview" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movie">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MovieReview">
+              <PropertyRef Name="MovieId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MovieRevi__UserI__6A30C649">
+          <End Type="MovieWebsiteModel.User" Role="User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="MovieWebsiteModel.MovieReview" Role="MovieReview" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MovieReview">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="NewComment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NewId" Type="Int32" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Meta" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Hide" Type="Boolean" />
+          <Property Name="C_ORDER" Type="Int32" />
+          <Property Name="InitDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="News" Relationship="MovieWebsiteModel.FK__NewCommen__InitD__6FE99F9F" FromRole="NewComment" ToRole="News" />
+          <NavigationProperty Name="User" Relationship="MovieWebsiteModel.FK__NewCommen__UserI__70DDC3D8" FromRole="NewComment" ToRole="User" />
+          <NavigationProperty Name="NewCommentReplies" Relationship="MovieWebsiteModel.FK__NewCommen__InitD__7B5B524B" FromRole="NewComment" ToRole="NewCommentReply" />
+        </EntityType>
+        <Association Name="FK__NewCommen__InitD__6FE99F9F">
+          <End Type="MovieWebsiteModel.News" Role="News" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="MovieWebsiteModel.NewComment" Role="NewComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="News">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NewComment">
+              <PropertyRef Name="NewId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__NewCommen__UserI__70DDC3D8">
+          <End Type="MovieWebsiteModel.User" Role="User" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="MovieWebsiteModel.NewComment" Role="NewComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NewComment">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="NewCommentReply">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NewCommentId" Type="Int32" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Meta" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Hide" Type="Boolean" />
+          <Property Name="C_ORDER" Type="Int32" />
+          <Property Name="InitDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="NewComment" Relationship="MovieWebsiteModel.FK__NewCommen__InitD__7B5B524B" FromRole="NewCommentReply" ToRole="NewComment" />
+          <NavigationProperty Name="User" Relationship="MovieWebsiteModel.FK__NewCommen__UserI__7C4F7684" FromRole="NewCommentReply" ToRole="User" />
+        </EntityType>
+        <Association Name="FK__NewCommen__InitD__7B5B524B">
+          <End Type="MovieWebsiteModel.NewComment" Role="NewComment" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="MovieWebsiteModel.NewCommentReply" Role="NewCommentReply" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NewComment">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NewCommentReply">
+              <PropertyRef Name="NewCommentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__NewCommen__UserI__7C4F7684">
+          <End Type="MovieWebsiteModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="MovieWebsiteModel.NewCommentReply" Role="NewCommentReply" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NewCommentReply">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="SubMenu">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ParentId" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Link" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Meta" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Hide" Type="Boolean" />
+          <Property Name="C_ORDER" Type="Int32" />
+          <Property Name="InitDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Menu" Relationship="MovieWebsiteModel.FK__SubMenu__ParentI__7F2BE32F" FromRole="SubMenu" ToRole="Menu" />
+        </EntityType>
+        <Association Name="FK__SubMenu__ParentI__7F2BE32F">
+          <End Type="MovieWebsiteModel.Menu" Role="Menu" Multiplicity="0..1" />
+          <End Type="MovieWebsiteModel.SubMenu" Role="SubMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SubMenu">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -119,6 +752,10 @@
           <EntitySetMapping Name="Movies">
             <EntityTypeMapping TypeName="MovieWebsiteModel.Movie">
               <MappingFragment StoreEntitySet="Movie">
+                <ScalarProperty Name="RunTime" ColumnName="RunTime" />
+                <ScalarProperty Name="ReleaseDate" ColumnName="ReleaseDate" />
+                <ScalarProperty Name="Summary" ColumnName="Summary" />
+                <ScalarProperty Name="Trailer" ColumnName="Trailer" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="InitDate" ColumnName="InitDate" />
                 <ScalarProperty Name="C_ORDER" ColumnName="_ORDER" />
@@ -134,18 +771,142 @@
           <EntitySetMapping Name="Celebrities">
             <EntityTypeMapping TypeName="MovieWebsiteModel.Celebrity">
               <MappingFragment StoreEntitySet="Celebrity">
+                <ScalarProperty Name="CastImage" ColumnName="CastImage" />
+                <ScalarProperty Name="Birth" ColumnName="Birth" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+                <ScalarProperty Name="FulBio" ColumnName="FulBio" />
+                <ScalarProperty Name="Bio" ColumnName="Bio" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="InitDate" ColumnName="InitDate" />
                 <ScalarProperty Name="C_ORDER" ColumnName="_ORDER" />
                 <ScalarProperty Name="Hide" ColumnName="Hide" />
                 <ScalarProperty Name="Meta" ColumnName="Meta" />
                 <ScalarProperty Name="Role" ColumnName="Role" />
                 <ScalarProperty Name="Avatar" ColumnName="Avatar" />
-                <ScalarProperty Name="NAME" ColumnName="NAME" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-        </EntityContainerMapping>
+          <EntitySetMapping Name="News">
+            <EntityTypeMapping TypeName="MovieWebsiteModel.News">
+              <MappingFragment StoreEntitySet="News">
+                <ScalarProperty Name="Wallpaper" ColumnName="Wallpaper" />
+                <ScalarProperty Name="InitDate" ColumnName="InitDate" />
+                <ScalarProperty Name="C_ORDER" ColumnName="_ORDER" />
+                <ScalarProperty Name="Hide" ColumnName="Hide" />
+                <ScalarProperty Name="Meta" ColumnName="Meta" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Genres">
+            <EntityTypeMapping TypeName="MovieWebsiteModel.Genre">
+              <MappingFragment StoreEntitySet="Genre">
+                <ScalarProperty Name="InitDate" ColumnName="InitDate" />
+                <ScalarProperty Name="C_ORDER" ColumnName="_ORDER" />
+                <ScalarProperty Name="Hide" ColumnName="Hide" />
+                <ScalarProperty Name="Meta" ColumnName="Meta" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="MovieGenre" TypeName="MovieWebsiteModel.MovieGenre" StoreEntitySet="MovieGenre">
+            <EndProperty Name="Movie">
+              <ScalarProperty Name="Id" ColumnName="MovieId" />
+            </EndProperty>
+            <EndProperty Name="Genre">
+              <ScalarProperty Name="Id" ColumnName="GenreId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="MovieCasts">
+            <EntityTypeMapping TypeName="MovieWebsiteModel.MovieCast">
+              <MappingFragment StoreEntitySet="MovieCast">
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="CelebId" ColumnName="CelebId" />
+                <ScalarProperty Name="MovieId" ColumnName="MovieId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="MovieWebsiteModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="InitDate" ColumnName="InitDate" />
+                <ScalarProperty Name="C_ORDER" ColumnName="_ORDER" />
+                <ScalarProperty Name="Hide" ColumnName="Hide" />
+                <ScalarProperty Name="Meta" ColumnName="Meta" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Avatar" ColumnName="Avatar" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MovieReviews">
+            <EntityTypeMapping TypeName="MovieWebsiteModel.MovieReview">
+              <MappingFragment StoreEntitySet="MovieReview">
+                <ScalarProperty Name="InitDate" ColumnName="InitDate" />
+                <ScalarProperty Name="C_ORDER" ColumnName="_ORDER" />
+                <ScalarProperty Name="Hide" ColumnName="Hide" />
+                <ScalarProperty Name="Meta" ColumnName="Meta" />
+                <ScalarProperty Name="Score" ColumnName="Score" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="MovieId" ColumnName="MovieId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NewComments">
+            <EntityTypeMapping TypeName="MovieWebsiteModel.NewComment">
+              <MappingFragment StoreEntitySet="NewComment">
+                <ScalarProperty Name="InitDate" ColumnName="InitDate" />
+                <ScalarProperty Name="C_ORDER" ColumnName="_ORDER" />
+                <ScalarProperty Name="Hide" ColumnName="Hide" />
+                <ScalarProperty Name="Meta" ColumnName="Meta" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="NewId" ColumnName="NewId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NewCommentReplies">
+            <EntityTypeMapping TypeName="MovieWebsiteModel.NewCommentReply">
+              <MappingFragment StoreEntitySet="NewCommentReply">
+                <ScalarProperty Name="InitDate" ColumnName="InitDate" />
+                <ScalarProperty Name="C_ORDER" ColumnName="_ORDER" />
+                <ScalarProperty Name="Hide" ColumnName="Hide" />
+                <ScalarProperty Name="Meta" ColumnName="Meta" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="NewCommentId" ColumnName="NewCommentId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SubMenus">
+            <EntityTypeMapping TypeName="MovieWebsiteModel.SubMenu">
+              <MappingFragment StoreEntitySet="SubMenu">
+                <ScalarProperty Name="InitDate" ColumnName="InitDate" />
+                <ScalarProperty Name="C_ORDER" ColumnName="_ORDER" />
+                <ScalarProperty Name="Hide" ColumnName="Hide" />
+                <ScalarProperty Name="Meta" ColumnName="Meta" />
+                <ScalarProperty Name="Link" ColumnName="Link" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

@@ -1,4 +1,5 @@
 ﻿@model List<MovieWebsite.Models.Movie>
+@using MovieWebsite.Utilities;
 <div class="slider movie-items">
     <div class="container">
         <div class="row">
@@ -10,18 +11,19 @@
                 <a href="#"><i class="ion-social-youtube"></i></a>
             </div>
             <div class="slick-multiItemSlider">
-                @Model = @Model.Take(9);
                 @foreach(var movie in Model)
                 {
                 <div class="movie-item">
-                    <div class="mv-img">
-                        <a href="#"><img src="Content/images/uploads/@movie.Wallpaper" alt="" width="285" height="437"></a>
+                    <div href="#" class="mv-img" id="topSlider"> 
+                        <a href="/movie/@movie.Meta"><img style="width: 285px; height: 437px;"src="Content/images/uploads/@movie.Wallpaper" alt="" width="285" height="437"></a>
                     </div>
                     <div class="title-in">
                         <div class="cate">
-                            <span class="blue"><a href="#">Sci-fi</a></span>
+                            @foreach(var genre in movie.Genres){
+                                <span class="@GenreColor.GetColorClass(genre.Name)"><a href="#">@genre.Name</a></span>
+                            }    
                         </div>
-                        <h6><a href="#">@movie.Name</a></h6>
+                        <h6><a href="/movie/@movie.Meta">@movie.Name</a></h6>
                         <p><i class="ion-android-star"></i><span>@movie.Score</span> /10</p>
                     </div>
                 </div>

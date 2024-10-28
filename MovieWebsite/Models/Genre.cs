@@ -12,35 +12,22 @@ namespace MovieWebsite.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Movie
+    public partial class Genre
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Movie()
+        public Genre()
         {
-            this.Genres = new HashSet<Genre>();
-            this.MovieCasts = new HashSet<MovieCast>();
-            this.MovieReviews = new HashSet<MovieReview>();
+            this.Movies = new HashSet<Movie>();
         }
     
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Wallpaper { get; set; }
-        public Nullable<decimal> Score { get; set; }
         public string Meta { get; set; }
         public Nullable<bool> Hide { get; set; }
         public Nullable<int> C_ORDER { get; set; }
         public Nullable<System.DateTime> InitDate { get; set; }
-        public string Type { get; set; }
-        public string Trailer { get; set; }
-        public string Summary { get; set; }
-        public Nullable<System.DateTime> ReleaseDate { get; set; }
-        public Nullable<int> RunTime { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Genre> Genres { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MovieCast> MovieCasts { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MovieReview> MovieReviews { get; set; }
+        public virtual ICollection<Movie> Movies { get; set; }
     }
 }

@@ -12,30 +12,26 @@ namespace MovieWebsite.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Celebrity
+    public partial class NewComment
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Celebrity()
+        public NewComment()
         {
-            this.MovieCasts = new HashSet<MovieCast>();
+            this.NewCommentReplies = new HashSet<NewCommentReply>();
         }
     
         public int Id { get; set; }
-        public string Name { get; set; }
-        public string Avatar { get; set; }
-        public string CastImage { get; set; }
-        public string Role { get; set; }
+        public Nullable<int> NewId { get; set; }
+        public Nullable<int> UserId { get; set; }
+        public string Content { get; set; }
         public string Meta { get; set; }
         public Nullable<bool> Hide { get; set; }
         public Nullable<int> C_ORDER { get; set; }
         public Nullable<System.DateTime> InitDate { get; set; }
-        public string Country { get; set; }
-        public string Bio { get; set; }
-        public string FulBio { get; set; }
-        public Nullable<int> Height { get; set; }
-        public Nullable<System.DateTime> Birth { get; set; }
     
+        public virtual News News { get; set; }
+        public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MovieCast> MovieCasts { get; set; }
+        public virtual ICollection<NewCommentReply> NewCommentReplies { get; set; }
     }
 }

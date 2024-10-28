@@ -8,6 +8,24 @@
         <EntityTypeShape EntityType="MovieWebsiteModel.Menu" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="MovieWebsiteModel.Movie" Width="1.5" PointX="3.375" PointY="0.75" />
         <EntityTypeShape EntityType="MovieWebsiteModel.Celebrity" Width="1.5" PointX="0.75" PointY="4.75" />
+        <EntityTypeShape EntityType="MovieWebsiteModel.News" Width="1.5" PointX="7.625" PointY="0.75" />
+        <EntityTypeShape EntityType="MovieWebsiteModel.Genre" Width="1.5" PointX="5.375" PointY="0.75" />
+        <AssociationConnector Association="MovieWebsiteModel.MovieGenre" />
+        <EntityTypeShape EntityType="MovieWebsiteModel.MovieCast" Width="1.5" PointX="3.5" PointY="5.375" />
+        <AssociationConnector Association="MovieWebsiteModel.FK__MovieCast__Celeb__5CD6CB2B" />
+        <AssociationConnector Association="MovieWebsiteModel.FK__MovieCast__Movie__5BE2A6F2" />
+        <EntityTypeShape EntityType="MovieWebsiteModel.User" Width="1.5" PointX="5.5" PointY="5.375" />
+        <EntityTypeShape EntityType="MovieWebsiteModel.MovieReview" Width="1.5" PointX="8.625" PointY="4.5" />
+        <AssociationConnector Association="MovieWebsiteModel.FK__MovieRevi__Movie__693CA210" />
+        <AssociationConnector Association="MovieWebsiteModel.FK__MovieRevi__UserI__6A30C649" />
+        <EntityTypeShape EntityType="MovieWebsiteModel.NewComment" Width="1.5" PointX="10.875" PointY="3.5" />
+        <AssociationConnector Association="MovieWebsiteModel.FK__NewCommen__InitD__6FE99F9F" />
+        <AssociationConnector Association="MovieWebsiteModel.FK__NewCommen__UserI__70DDC3D8" />
+        <EntityTypeShape EntityType="MovieWebsiteModel.NewCommentReply" Width="1.5" PointX="13.125" PointY="4.875" />
+        <AssociationConnector Association="MovieWebsiteModel.FK__NewCommen__InitD__7B5B524B" />
+        <AssociationConnector Association="MovieWebsiteModel.FK__NewCommen__UserI__7C4F7684" />
+        <EntityTypeShape EntityType="MovieWebsiteModel.SubMenu" Width="1.5" PointX="3" PointY="8.5" />
+        <AssociationConnector Association="MovieWebsiteModel.FK__SubMenu__ParentI__7F2BE32F" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

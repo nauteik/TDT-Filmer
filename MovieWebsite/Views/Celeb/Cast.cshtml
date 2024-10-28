@@ -1,0 +1,17 @@
+﻿@model List<MovieWebsite.Models.CastViewModel>
+<div class="mvcast-item">
+    @foreach(var cast in Model)
+    {
+    <div class="cast-it">
+        <div class="cast-left cebleb-film">
+            <img style="width: 55px; height:77px;" src="/Content/images/uploads/@cast.MovieImage" alt="">
+            <div>
+                <a href="/movie/@cast.MovieMeta">@cast.MovieName </a>
+                <p style="white-space: nowrap;" class="time">@cast.Role</p>
+            </div>
+
+        </div>
+        <p>...  @cast.Year</p>
+    </div>
+    }
+</div>

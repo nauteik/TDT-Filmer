@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Movie Website";
 }
 @{ 
     Html.RenderAction("getSlider", "Default");
@@ -15,9 +15,9 @@
                 <div class="tabs">
                     <ul class="tab-links">
                         <li class="active"><a href="#tab1">#Popular</a></li>
-                        <li><a href="#tab2"> #Coming soon</a></li>
+                        @*<li><a href="#tab2"> #Coming soon</a></li>
                         <li><a href="#tab3">  #Top rated  </a></li>
-                        <li><a href="#tab4"> #Most reviewed</a></li>
+                        <li><a href="#tab4"> #Most reviewed</a></li>*@
                     </ul>
                     <div class="tab-content">
                         @{
@@ -32,9 +32,9 @@
                 <div class="tabs">
                     <ul class="tab-links-2">
                         <li class="active"><a href="#tab21">#Popular</a></li>
-                        <li ><a href="#tab22"> #Coming soon</a></li>
+                        @*<li ><a href="#tab22"> #Coming soon</a></li>
                         <li><a href="#tab23">  #Top rated  </a></li>
-                        <li><a href="#tab24"> #Most reviewed</a></li>
+                        <li><a href="#tab24"> #Most reviewed</a></li>*@
                     </ul>
                     <div class="tab-content">
                         @{ 
@@ -53,3 +53,7 @@
         </div>
     </div>
 </div>
+@{ 
+    Html.RenderAction("GetTrailer", "Default");
+    Html.RenderAction("GetNews", "Default");
+}

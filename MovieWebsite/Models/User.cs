@@ -12,35 +12,34 @@ namespace MovieWebsite.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Movie
+    public partial class User
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Movie()
+        public User()
         {
-            this.Genres = new HashSet<Genre>();
-            this.MovieCasts = new HashSet<MovieCast>();
             this.MovieReviews = new HashSet<MovieReview>();
+            this.NewComments = new HashSet<NewComment>();
+            this.NewCommentReplies = new HashSet<NewCommentReply>();
         }
     
         public int Id { get; set; }
-        public string Name { get; set; }
-        public string Wallpaper { get; set; }
-        public Nullable<decimal> Score { get; set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
+        public string Email { get; set; }
+        public string Avatar { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Country { get; set; }
         public string Meta { get; set; }
         public Nullable<bool> Hide { get; set; }
         public Nullable<int> C_ORDER { get; set; }
         public Nullable<System.DateTime> InitDate { get; set; }
-        public string Type { get; set; }
-        public string Trailer { get; set; }
-        public string Summary { get; set; }
-        public Nullable<System.DateTime> ReleaseDate { get; set; }
-        public Nullable<int> RunTime { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Genre> Genres { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MovieCast> MovieCasts { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MovieReview> MovieReviews { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<NewComment> NewComments { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<NewCommentReply> NewCommentReplies { get; set; }
     }
 }

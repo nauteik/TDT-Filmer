@@ -28,5 +28,13 @@ namespace MovieWebsite.Models
         public virtual DbSet<Menu> Menus { get; set; }
         public virtual DbSet<Movie> Movies { get; set; }
         public virtual DbSet<Celebrity> Celebrities { get; set; }
+        public virtual DbSet<News> News { get; set; }
+        public virtual DbSet<Genre> Genres { get; set; }
+        public virtual DbSet<MovieCast> MovieCasts { get; set; }
+        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<MovieReview> MovieReviews { get; set; }
+        public virtual DbSet<NewComment> NewComments { get; set; }
+        public virtual DbSet<NewCommentReply> NewCommentReplies { get; set; }
+        public virtual DbSet<SubMenu> SubMenus { get; set; }
     }
 }

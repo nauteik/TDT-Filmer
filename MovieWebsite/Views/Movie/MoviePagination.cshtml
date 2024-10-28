@@ -1,0 +1,49 @@
+﻿
+@{
+    int totalPages = ViewBag.totalPages;
+    int currPage = ViewBag.currPage;
+    var queryString = HttpUtility.ParseQueryString(Request.QueryString.ToString());
+    queryString["page"] = currPage.ToString();
+    string url = Url.Action("Index", "Movie", queryString.ToString());
+}
+<ul style="margin: auto; padding: 10px;" class="pagination">
+    @if (currPage > 1)
+    {
+        <li class="icon-prev">
+            <a href="@Url.Action("Index", "Movie", new { page = currPage - 1, movieName = queryString["movieName"], category = queryString["category"], fromYear = queryString["fromYear"], toYear = queryString["toYear"], sort = queryString["sort"] }).ToLower()"><i class="ion-arrow-left-b"></i></a>
+        </li>
+    }
+    @for (int i = Math.Max(1, currPage - 2); i <= Math.Min(totalPages, currPage + 2); i++)
+    {
+        if (i == currPage)
+        {
+            <li class="active">
+                <a  href="@Url.Action("Index", "Movie", new { page = currPage, movieName = queryString["movieName"], category = queryString["category"], fromYear = queryString["fromYear"], toYear = queryString["toYear"], sort = queryString["sort"] }).ToLower()">@i</a>
+            </li>
+        }
+        else
+        {
+            <li>
+                <a href="@Url.Action("Index", "Movie", new { page = i, movieName = queryString["movieName"], category = queryString["category"], fromYear = queryString["fromYear"], toYear = queryString["toYear"], sort = queryString["sort"] }).ToLower()">@i</a>
+            </li>
+        }
+    }
+    @if (currPage < totalPages - 2)
+    {
+        if (currPage < totalPages - 3)
+        {
+            <li>
+                <span>...</span>
+            </li>
+        }
+        <li>
+            <a href="@Url.Action("Index", "Movie", new { page = currPage, movieName = queryString["movieName"], category = queryString["category"], fromYear = queryString["fromYear"], toYear = queryString["toYear"], sort = queryString["sort"] }).ToLower()">@totalPages</a>
+        </li>
+    }
+    @if (currPage < totalPages)
+    {
+        <li class="icon-next">
+            <a href="@Url.Action("Index", "Movie", new { page = currPage + 1, movieName = queryString["movieName"], category = queryString["category"], fromYear = queryString["fromYear"], toYear = queryString["toYear"], sort = queryString["sort"] }).ToLower()"><i class="ion-arrow-right-b"></i></a>
+        </li>
+    }
+</ul>

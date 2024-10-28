@@ -1,5 +1,4 @@
 ﻿@model IEnumerable<MovieWebsite.Models.Menu>
-
 <!-- BEGIN | Header -->
 <header class="ht-header">
     <div class="container">
@@ -14,7 +13,7 @@
                         <span></span>
                     </div>
                 </div>
-                <a href="index-2.html"><img class="logo" src="Content/images/logo1.png" alt="" width="119" height="58"></a>
+                <a href="/"><img class="logo" src="/Content/images/logo1.png" alt="" width="119" height="58"></a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse flex-parent" id="bs-example-navbar-collapse-1">
@@ -24,17 +23,35 @@
                     </li>
                     @foreach (var menu in Model)
                     {
-                        <li class="dropdown first">
-                            <a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown">
-                                @menu.Name
-                                @*<i class="fa fa-angle-down" aria-hidden="true"></i>*@
-                            </a>
-                            @*<ul class="dropdown-menu level1">
-                        <li><a href="index-2.html">Home 01</a></li>
-                        <li><a href="homev2.html">Home 02</a></li>
-                        <li><a href="homev3.html">Home 03</a></li>
-                    </ul>*@
-                        </li>
+                        if (menu.SubMenus.Count != 0)
+                        {
+                            <li class="dropdown first">
+                                <a href="/@menu.Meta" class="btn btn-default" dropdown-toggle lv1" data-toggle="dropdown">
+                                    @menu.Name
+                                    <i class="fa fa-angle-down" aria-hidden="true"></i>
+                                </a>
+                                <ul class="dropdown-menu level1">
+                                    @foreach (var submenu in menu.SubMenus)
+                                    {
+                                        <li><a href="@submenu.Link">@submenu.Name</a></li>
+                                    }
+                                </ul>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="dropdown first">
+                                <a href="/@menu.Meta" class="btn btn-default">
+                                    @menu.Name
+                                    @*<i class="fa fa-angle-down" aria-hidden="true"></i>*@
+                                </a>
+                                @*<ul class="dropdown-menu level1">
+                                        <li><a href="index-2.html">Home 01</a></li>
+                                        <li><a href="homev2.html">Home 02</a></li>
+                                        <li><a href="homev3.html">Home 03</a></li>
+                                    </ul>*@
+                            </li>
+                        }
 
                     }
                 </ul>
