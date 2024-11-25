@@ -4,6 +4,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title</title>
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
+    
     <style type="text/css">
         .fancybox-margin {
             margin-right: 17px;
@@ -11,15 +14,15 @@
     </style>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    @Scripts.Render("~/Scripts")
+    <!-- @Scripts.Render("~/Scripts") -->
 </head>
 <body style="overflow: visible" class="openform">
-<div id="preloader">
+<!-- <div id="preloader">
     <div id="status">
         <span></span>
         <span></span>
     </div>
-</div>
+</div> -->
     <div class="login-wrapper" id="login-content">
     <div class="login-content">
         <a href="#" class="close"><i class="fa fa-times"></i></a>
@@ -39,6 +42,9 @@
                 </label>
             </div>
             <div class="row">
+                <div class="error-message" style="color: red; display: none;"></div>
+            </div>
+            <div class="row">
             	<div class="remember">
 					<div>
 						<input type="checkbox" name="remember" id="remember" value="Remember me"><span>Remember me</span>
@@ -47,7 +53,10 @@
             	</div>
             </div>
            <div class="row">
-           	 <button type="submit">Login</button>
+           	 <button type="submit" id="loginButton">
+           	 	<span class="button-text">Login</span>
+           	 	<span class="spinner-border spinner" style="display: none; margin-left: 5px;" role="status" aria-hidden="true"></span>
+           	 </button>
            </div>
         </form>
         <div class="row">
@@ -65,36 +74,42 @@
     <div class="login-content">
         <a href="#" class="close"><i class="fa fa-times"></i></a>
         <h3>sign up</h3>
-        <form method="post" action="#">
-            <div class="row">
-                 <label for="username-2">
-                    Username:
-                    <input type="text" name="username" id="username-2" placeholder="Hugh Jackman" pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{8,20}$" required="required" />
-                </label>
+        <form method="post" id="loginForm">
+    <div class="row">
+        <label for="username">
+            Username:
+            <input type="text" name="username" id="username" required="required" />
+        </label>
+    </div>
+    
+    <div class="row">
+        <label for="password">
+            Password:
+            <input type="password" name="password" id="password" required="required" />
+        </label>
+    </div>
+    
+    <!-- Thêm div để hiển thị thông báo lỗi -->
+    <div class="row">
+        <div class="error-message" style="color: red; display: none;"></div>
+    </div>
+    
+    <div class="row">
+        <div class="remember">
+            <div>
+                <input type="checkbox" name="remember" id="remember" value="Remember me"><span>Remember me</span>
             </div>
-           
-            <div class="row">
-                <label for="email-2">
-                    your email:
-                    <input type="password" name="email" id="email-2" placeholder="" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required="required" />
-                </label>
-            </div>
-             <div class="row">
-                <label for="password-2">
-                    Password:
-                    <input type="password" name="password" id="password-2" placeholder="" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required="required" />
-                </label>
-            </div>
-             <div class="row">
-                <label for="repassword-2">
-                    re-type Password:
-                    <input type="password" name="password" id="repassword-2" placeholder="" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required="required" />
-                </label>
-            </div>
-           <div class="row">
-             <button type="submit">sign up</button>
-           </div>
-        </form>
+            <a href="#">Forget password ?</a>
+        </div>
+    </div>
+    
+    <div class="row">
+        <button type="submit" id="loginButton">
+            <span class="button-text">Login</span>
+            <span class="spinner-border spinner" style="display: none; margin-left: 5px;" role="status" aria-hidden="true"></span>
+        </button>
+    </div>
+</form>
     </div>
 </div>
     @{
@@ -104,5 +119,30 @@
     @{ 
         Html.RenderAction("GetFooter", "Default");
     }
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            toastr.options = {
+                "closeButton": true,
+                "debug": false,
+                "newestOnTop": false,
+                "progressBar": true,
+                "positionClass": "toast-top-right",
+                "preventDuplicates": false,
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "2000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            };
+        });
+    </script>
+    @Scripts.Render("~/Scripts")
+    @RenderSection("Scripts", required: false)
 </body>
 </html>

@@ -18,3 +18,31 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.spinner-border {
+    width: 1em;
+    height: 1em;
+    border: 2px solid currentColor;
+    border-right-color: transparent;
+    border-radius: 50%;
+    animation: spinner-border .75s linear infinite;
+}
+
+@keyframes spinner-border {
+    to { transform: rotate(360deg); }
+}
+
+#loginButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.error-message {
+    margin-bottom: 10px;
+    text-align: center;
+}
+.comment-content {
+    font-size: 1.5rem;
+    color: white;
+}

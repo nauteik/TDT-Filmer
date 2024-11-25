@@ -1,0 +1,123 @@
+﻿@model MovieWebsite.Models.User
+@{
+    ViewBag.Title = "Profile";
+}
+<div class="hero user-hero">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="hero-ct">
+                    <h1>@Model.Username's profile</h1>
+                    <ul class="breadcumb">
+                        <li class="active"><a href="/">Home</a></li>
+                        <li><span class="ion-ios-arrow-right"></span>Profile</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="page-single">
+    <div class="container">
+        <div class="row ipad-width">
+            <div class="col-md-3 col-sm-12 col-xs-12">
+                <div class="user-information">
+                    <div class="user-img">
+                        <img src="~/Content/images/uploads/@(Model.Avatar ?? "defaultavatar.png")" alt="" style="height: 120px; width: 120px; border-radius: 50%; object-fit: cover;" id="avatarPreview"><br>
+                        <form id="avatarForm" enctype="multipart/form-data" style="display: inline;">
+                            <input type="file" name="avatarFile" id="avatarFile" accept="image/*" style="display: none;">
+                            <a href="#" class="redbtn" id="changeAvatarBtn">Change avatar</a>
+                        </form>
+                    </div>
+                    <div class="user-fav">
+                        <p>Account Details</p>
+                        <ul>
+                            <li><a href="#" class="tab-link" data-tab="profile-tab">Profile</a></li>
+                            <li><a href="#" class="tab-link" data-tab="password-tab">Change password</a></li>
+                            <li><a href="#">Favorite movies</a></li>
+                            <li><a href="#">Rated movies</a></li>
+                            <li><a href="#" id="logoutBtn">Log out</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9 col-sm-12 col-xs-12">
+                <div class="form-style-1 user-pro">
+                    <!-- Profile Tab -->
+                    <div class="tab-content" id="profile-tab">
+                        @using (Html.BeginForm("UpdateProfile", "Account", FormMethod.Post, new { @class = "user", id = "profileForm" }))
+                        {
+                            <h4>01. Profile details</h4>
+                            <div class="row">
+                                <div class="col-md-6 form-it">
+                                    <label>Username</label>
+                                    @Html.TextBoxFor(m => m.Username, new { @readonly = "readonly", style = "color: black" })
+                                </div>
+                                <div class="col-md-6 form-it">
+                                    <label>Email Address</label>
+                                    @Html.TextBoxFor(m => m.Email, new { @readonly = "readonly", style = "color: black" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 form-it">
+                                    <label>First Name</label>
+                                    @Html.TextBoxFor(m => m.FirstName)
+                                </div>
+                                <div class="col-md-6 form-it">
+                                    <label>Last Name</label>
+                                    @Html.TextBoxFor(m => m.LastName)
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 form-it">
+                                    <label>Country</label>
+                                    @Html.TextBoxFor(m => m.Country)
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <input class="submit" type="submit" value="save">
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+                    <!-- Change Password Tab -->
+                    <div class="tab-content" id="password-tab" style="display: none;">
+                        <form id="passwordForm">
+                            <h4>02. Change password</h4>
+                            <div class="row">
+                                <div class="col-md-6 form-it">
+                                    <label>Old Password</label>
+                                    <input type="password" name="oldPassword" required>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 form-it">
+                                    <label>New Password</label>
+                                    <input type="password" name="newPassword" required>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 form-it">
+                                    <label>Confirm New Password</label>
+                                    <input type="password" name="confirmPassword" required>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <input class="submit" type="submit" value="Change">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/Scripts/UserScript.js"></script>
+}

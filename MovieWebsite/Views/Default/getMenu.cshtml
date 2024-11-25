@@ -26,7 +26,7 @@
                         if (menu.SubMenus.Count != 0)
                         {
                             <li class="dropdown first">
-                                <a href="/@menu.Meta" class="btn btn-default" dropdown-toggle lv1" data-toggle="dropdown">
+                                <a href="/@menu.Meta" class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown">
                                     @menu.Name
                                     <i class="fa fa-angle-down" aria-hidden="true"></i>
                                 </a>
@@ -41,23 +41,31 @@
                         else
                         {
                             <li class="dropdown first">
-                                <a href="/@menu.Meta" class="btn btn-default">
-                                    @menu.Name
-                                    @*<i class="fa fa-angle-down" aria-hidden="true"></i>*@
-                                </a>
-                                @*<ul class="dropdown-menu level1">
-                                        <li><a href="index-2.html">Home 01</a></li>
-                                        <li><a href="homev2.html">Home 02</a></li>
-                                        <li><a href="homev3.html">Home 03</a></li>
-                                    </ul>*@
+                                <a href="/@menu.Meta" class="btn btn-default">@menu.Name</a>
                             </li>
                         }
-
                     }
                 </ul>
                 <ul class="nav navbar-nav flex-child-menu menu-right">
-                    <li class="loginLink"><a href="#">LOG In</a></li>
-                    <li class="btn signupLink"><a href="#">sign up</a></li>
+                    @if (Session["Username"] != null)
+                    {
+                        <li class="dropdown first" style="position: relative;">
+                            <a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown" style="text-transform: none; display: flex; align-items: center;">
+                                <img src="~/Content/images/uploads/@Session["Avatar"]" alt="avatar" style="width: 25px; height: 25px; border-radius: 50%; margin-right: 8px; object-fit: cover;" />
+                                @Session["Username"]
+                                <i class="fa fa-angle-down" aria-hidden="true" style="margin-left: 8px;"></i>
+                            </a>
+                            <ul class="dropdown-menu level1" style="right: 0; left: auto; min-width: 130px;">
+                                <li><a href="/user/profile">Profile</a></li>
+                                <li><a href="#" id="logoutBtn">Logout</a></li>
+                            </ul>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="loginLink"><a href="#">LOG In</a></li>
+                        <li class="btn signupLink"><a href="#">sign up</a></li>
+                    }
                 </ul>
             </div>
             <!-- /.navbar-collapse -->

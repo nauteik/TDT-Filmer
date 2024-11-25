@@ -3,6 +3,16 @@ $(document).ready(function () {
     $("#loginForm").on("submit", function (e) {
         e.preventDefault();
         
+        // Show loading spinner and disable button
+        const $button = $("#loginButton");
+        const $spinner = $button.find(".spinner");
+        const $buttonText = $button.find(".button-text");
+        const $errorMessage = $(".error-message");
+        
+        $button.prop('disabled', true);
+        $spinner.show();
+        $errorMessage.hide();
+        
         var loginData = {
             username: $("#username").val(),
             password: $("#password").val(),
@@ -16,29 +26,22 @@ $(document).ready(function () {
             success: function (response) {
                 if (response.success) {
                     // Close login popup
-                    $("#login-content").removeClass("show");
+                    $("#login-content").parents('.overlay').removeClass("openform");
                     
-                    // Update UI for logged in user
-                    $(".btn-login").hide();
-                    $(".btn-signup").hide();
-                    $(".user-info").html(`
-                        <li class="dropdown">
-                            <a href="#">${response.username}</a>
-                            <ul class="dropdown-menu">
-                                <li><a href="/Account/Profile">Profile</a></li>
-                                <li><a href="#" id="logoutBtn">Logout</a></li>
-                            </ul>
-                        </li>
-                    `).show();
-
-                    // Show success message
-                    alert("Login successful!");
+                    // Reload current page after successful login
+                    window.location.reload();
                 } else {
-                    alert(response.message || "Login failed. Please try again.");
+                    // Show error message
+                    $errorMessage.text(response.message || "Login failed. Please try again.").show();
                 }
             },
             error: function () {
-                alert("An error occurred. Please try again.");
+                $errorMessage.text("An error occurred. Please try again.").show();
+            },
+            complete: function() {
+                // Hide loading spinner and enable button
+                $button.prop('disabled', false);
+                $spinner.hide();
             }
         });
     });
@@ -52,13 +55,8 @@ $(document).ready(function () {
             type: "POST",
             success: function (response) {
                 if (response.success) {
-                    // Update UI for logged out user
-                    $(".user-info").hide();
-                    $(".btn-login").show();
-                    $(".btn-signup").show();
-                    
-                    // Show success message
-                    alert("Logged out successfully!");
+                    // Reload page after successful logout
+                    window.location.reload();
                 }
             }
         });

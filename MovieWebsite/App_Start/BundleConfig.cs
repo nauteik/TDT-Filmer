@@ -26,7 +26,8 @@ namespace MovieWebsite
                        "~/Scripts/jquery.js",
                        "~/Scripts/plugins.js",
                        "~/Scripts/plugins2.js",
-                       "~/Scripts/login.js"
+                       "~/Scripts/login.js",
+                       "~/Scripts/NewScript.js"
                ));
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       

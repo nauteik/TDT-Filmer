@@ -1,11 +1,11 @@
 ﻿USE MovieWebsite
-
+SELECT * From Celebrity
 CREATE TABLE Menu
 (
 	Id INT PRIMARY KEY IDENTITY,
 	Name NVARCHAR(255),
 	Link NVARCHAR(255),
-	Meta VARCHAR(255),
+	Meta VARCHAR(255) UNIQUE,
 	Hide BIT,
 	_ORDER INT,
 	InitDate DATE,
@@ -16,7 +16,7 @@ CREATE TABLE SubMenu
 	ParentId INT,
 	Name NVARCHAR(255),
 	Link NVARCHAR(255),
-	Meta VARCHAR(255),
+	Meta VARCHAR(255) UNIQUE,
 	Hide BIT,
 	_ORDER INT,
 	InitDate DATE,
@@ -34,7 +34,7 @@ CREATE TABLE Movie
 	ReleaseDate DATE,
 	RunTime INT,
 
-	Meta VARCHAR(255),
+	Meta VARCHAR(255) UNIQUE,
 	Hide BIT,
 	_ORDER INT,
 	InitDate DATE
@@ -93,7 +93,7 @@ CREATE TABLE News
 	Content NVARCHAR(MAX),
 	Wallpaper VARCHAR(255),
 	
-	Meta VARCHAR(255),
+	Meta VARCHAR(255) UNIQUE,
 	Hide BIT,
 	_ORDER INT,
 	InitDate DATETIME
@@ -114,6 +114,7 @@ CREATE TABLE Users
 	_ORDER INT,
 	InitDate DATETIME
 )
+SELECT * From NEWS
 CREATE TABLE MovieReview
 (
 	MovieId INT,
@@ -143,6 +144,7 @@ CREATE TABLE NewComment
 	FOREIGN KEY (NewId) REFERENCES News(Id) ON DELETE CASCADE,
     FOREIGN KEY (UserId) REFERENCES Users(Id) ON DELETE CASCADE
 )
+
 CREATE TABLE NewCommentReply
 (
 	Id INT PRIMARY KEY IDENTITY,
@@ -155,14 +157,10 @@ CREATE TABLE NewCommentReply
 	_ORDER INT,
 	InitDate DATETIME
 	FOREIGN KEY (NewCommentId) REFERENCES NewComment(Id) ON DELETE CASCADE,
-    FOREIGN KEY (UserId) REFERENCES Users(Id),
+    FOREIGN KEY (UserId) REFERENCES Users(Id)
 )
-INSERT INTO NewComment(NewId, UserId, Content, InitDate) VALUES
-(1, 1, N'Even though Journey''s classic vocalist Steve Perry didn''t reunite with the band during their Rock Hall performance (to the dismay of hopeful fans), he did offer up a touching speech.', GETDATE()),
-(1, 2, N'Joan Baez was the sharpest of the Rock Hall inductees, singing about deportees and talking social activism as well as joking about her age and the likelihood that a good portion of the Barclays.', GETDATE())
-INSERT INTO NewCommentReply(NewCommentId, UserId, Content, InitDate) VALUES
-(1, 1, N'Prince died not long after the 2016 Rock Hall ceremony, so this year''s edition featured Lenny Kravitz and a full gospel choir performing a swamp-funk take on When Doves Cry.', GETDATE()),
-(1, 2, N'Blue Sky Studios is one of the world’s leading digital animation movie studios and we are proud of their commitment to stay and grow in Connecticut.', GETDATE())
+
+
 INSERT INTO Users(Username, Password, Email, Avatar, FirstName, LastName, Country) VALUES
 ('tuankiet106', '123', 'letuankiet123@gmail.com', 'userava2.jpg', N'Kiệt', N'Lê', N'Việt Nam'),
 ('tuankiet', '123', 'letuankiet@gmail.com', 'userava3.jpg', N'Tân', N'Phạm', N'Việt Nam')
@@ -220,9 +218,15 @@ INSERT INTO MovieCast(MovieId, CelebId, Role) VALUES
 (1, 1, N'Bùi Lê Phát Hải'), (1, 2, N'Bronson Peary'), (1,3, N'Hugh Jackman'), (1, 4, N'Wolverine'), (2, 1, N'Robert'), (3, 1, N'Logan Paul')
 INSERT INTO News(Title, Image, Content, Meta, Hide, _Order, InitDate) VALUES
 ('Brie Larson to play first female white house candidate Victoria Woodull in Amazon film', 'blog-it1.jpg', 'testContent', 'brie-larson-to-play-first-female-white-house-candidate-victoria-woodull-in-amazon-film','FALSE', 1, '2024-10-16 15:00:00'),
-('Brie Larson to play first female white house candidate Victoria Woodull in Amazon film', 'blog-it1.jpg', 'testContent', 'brie-larson-to-play-first-female-white-house-candidate-victoria-woodull-in-amazon-film','FALSE', 1, '2024-10-16 15:00:00'),
-('Brie Larson to play first female white house candidate Victoria Woodull in Amazon film', 'blog-it1.jpg', 'testContent', 'brie-larson-to-play-first-female-white-house-candidate-victoria-woodull-in-amazon-film','FALSE', 1, '2024-10-16 15:00:00'),
-('Brie Larson to play first female white house candidate Victoria Woodull in Amazon film', 'blog-it1.jpg', 'testContent', 'brie-larson-to-play-first-female-white-house-candidate-victoria-woodull-in-amazon-film','FALSE', 1, '2024-10-16 15:00:00'),
-('Brie Larson to play first female white house candidate Victoria Woodull in Amazon film', 'blog-it1.jpg', 'testContent', 'brie-larson-to-play-first-female-white-house-candidate-victoria-woodull-in-amazon-film','FALSE', 1, '2024-10-16 15:00:00');
+('Brie Larson to play first female white house candidate Victoria Woodull in Amazon film', 'blog-it1.jpg', 'testContent', 'brie-larson-to-play-first-female-white-house-candidate-victoria-woodull-in-amazon-film1','FALSE', 1, '2024-10-16 15:00:00'),
+('Brie Larson to play first female white house candidate Victoria Woodull in Amazon film', 'blog-it1.jpg', 'testContent', 'brie-larson-to-play-first-female-white-house-candidate-victoria-woodull-in-amazon-film2','FALSE', 1, '2024-10-16 15:00:00'),
+('Brie Larson to play first female white house candidate Victoria Woodull in Amazon film', 'blog-it1.jpg', 'testContent', 'brie-larson-to-play-first-female-white-house-candidate-victoria-woodull-in-amazon-film3','FALSE', 1, '2024-10-16 15:00:00'),
+('Brie Larson to play first female white house candidate Victoria Woodull in Amazon film', 'blog-it1.jpg', 'testContent', 'brie-larson-to-play-first-female-white-house-candidate-victoria-woodull-in-amazon-film4','FALSE', 1, '2024-10-16 15:00:00');
+INSERT INTO NewComment(NewId, UserId, Content, InitDate) VALUES
+(1, 1, N'Even though Journey''s classic vocalist Steve Perry didn''t reunite with the band during their Rock Hall performance (to the dismay of hopeful fans), he did offer up a touching speech.', GETDATE()),
+(1, 2, N'Joan Baez was the sharpest of the Rock Hall inductees, singing about deportees and talking social activism as well as joking about her age and the likelihood that a good portion of the Barclays.', GETDATE())
+INSERT INTO NewCommentReply(NewCommentId, UserId, Content, InitDate) VALUES
+(1, 1, N'Prince died not long after the 2016 Rock Hall ceremony, so this year''s edition featured Lenny Kravitz and a full gospel choir performing a swamp-funk take on When Doves Cry.', GETDATE()),
+(1, 2, N'Blue Sky Studios is one of the world’s leading digital animation movie studios and we are proud of their commitment to stay and grow in Connecticut.', GETDATE())
 
-UPDATE News SET Content = N'Joss Whedon has a little bit of a history with superhero movies, and for creating layered female characters. After his documented frustrations with Wonder Woman, he''s getting another chance at the DC Extended Universe and Warner Bros., closing in on a deal to write direct and produce a Batgirl movie. It''s a somewhat surprising, but welcome move, given that Whedon has taken a long break to write something original, but has now pivoted to focus on developing the Batgirl project. First appearing in 1967 in Gardner Fox and Carmine Infantino''s story run The Million Dollar Debut Of Batgirl, she''s the superhero alias of Barbara Gordon, daughter of Gotham City Police Commissioner James Gordon. So we can likely expect J.K. Simmons'' take on Gordon to appear along with other Bat-related characters.'
+SELECT * From Users

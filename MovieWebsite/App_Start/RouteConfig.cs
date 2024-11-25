@@ -36,6 +36,16 @@ namespace MovieWebsite
                defaults: new { controller = "Celeb", action = "Detail", meta = UrlParameter.Optional }
            );
             routes.MapRoute(
+               name: "NewComment",
+               url: "New/AddComment",
+               defaults: new { controller = "New", action = "AddComment" }
+           );
+            routes.MapRoute(
+               name: "LoadMoreComments",
+               url: "New/LoadMoreComments",
+               defaults: new { controller = "New", action = "LoadMoreComments" }
+           );
+            routes.MapRoute(
                name: "new",
                url: "new",
                defaults: new { controller = "New", action = "NewList", id = UrlParameter.Optional }
@@ -44,6 +54,11 @@ namespace MovieWebsite
                name: "newDetail",
                url: "new/{meta}",
                defaults: new { controller = "New", action = "NewDetail", meta = UrlParameter.Optional }
+           );
+            routes.MapRoute(
+               name: "UserProfile",
+               url: "user/profile",
+               defaults: new { controller = "Account", action = "Profile" }
            );
             routes.MapRoute(
                name: "Default",
