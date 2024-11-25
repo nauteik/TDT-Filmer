@@ -62,6 +62,7 @@ namespace MovieWebsite.Controllers
             {
                 return View("NotFound");
             }
+            ViewBag.Title = movie.Name;
             return View(movie);
         }
         public ActionResult MoviePagination(int currPage, int totalPages)
