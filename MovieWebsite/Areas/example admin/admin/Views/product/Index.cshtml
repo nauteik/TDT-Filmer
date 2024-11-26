@@ -1,0 +1,70 @@
+﻿@using ShopOnline.Help
+@model ShopOnline.Models.Category
+@{
+    ViewBag.Title = "Danh sách sản phẩm";
+    Layout = "~/Areas/admin/Views/Shared/_MyLayout.cshtml";
+}
+@section _Header
+{
+    <!-- DataTables CSS -->
+    <link href="/Areas/admin/Content/vendor/datatables-plugins/dataTables.bootstrap.css" rel="stylesheet">
+    <!-- DataTables Responsive CSS -->
+    <link href="/Areas/admin/Content/vendor/datatables-responsive/dataTables.responsive.css" rel="stylesheet">
+}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-red">
+            <div class="panel-heading">
+                Quản lý Sản phẩm
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div class="bs-example" style="text-align:right; padding-bottom:10px;">
+                    <div class="btn-group">
+                        @Html.DropDownListFor(model => model.id, (SelectList)ViewBag.Category, " --- Tất cả sản phẩm --- ",
+                                                                        new { @class = "form-control", @id = "Category" })
+                    </div>
+                    <div class="btn-group">
+                        @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-plus'></span> Thêm mới", "Create", "Create", "product", routeValues: new { }, htmlAttributes: new { @class = "btn btn-primary" })
+                    </div>
+                </div>
+                <div id="getProduct"></div>
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+@section _Footer
+{
+    <!-- DataTables JavaScript -->
+    <script src="/Areas/admin/Content/vendor/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="/Areas/admin/Content/vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
+    <script src="/Areas/admin/Content/vendor/datatables-responsive/dataTables.responsive.js"></script>
+    <script>
+        $(document).ready(function () {
+            function getProduct() {
+                var CategoryId = $('#Category').val();               
+                $.ajax({
+                    url: '@Url.Action("getProduct", "product")',                    
+                    type: "GET",                    
+                    data: { id: CategoryId },
+                    success: function (data) {
+                        $("#getProduct").html(data);
+                    },
+                    error: function (data) {
+                        alert("something went wrong.");                       
+                    }
+                });
+            }
+            getProduct();
+            $("#Category").change(function () {               
+                getProduct();                
+            })
+        });
+    </script>
+}
+
+

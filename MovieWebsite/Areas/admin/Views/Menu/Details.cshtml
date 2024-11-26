@@ -1,0 +1,51 @@
+﻿@model MovieWebsite.Models.Menu
+@{
+    ViewBag.Title = "Chi tiết Menu";
+    Layout = "~/Areas/admin/Views/Shared/adminLayout.cshtml";
+}
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Chi tiết Menu</h6>
+    </div>
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-2">Tên menu:</dt>
+            <dd class="col-sm-10">@Html.DisplayFor(model => model.Name)</dd>
+
+            <dt class="col-sm-2">Đường dẫn:</dt>
+            <dd class="col-sm-10">@Html.DisplayFor(model => model.Link)</dd>
+
+            <dt class="col-sm-2">Meta:</dt>
+            <dd class="col-sm-10">@Html.DisplayFor(model => model.Meta)</dd>
+
+            <dt class="col-sm-2">Trạng thái:</dt>
+            <dd class="col-sm-10">
+                @if (Model.Hide == true)
+                {
+                    <span class="badge badge-danger">Ẩn</span>
+                }
+                else
+                {
+                    <span class="badge badge-success">Hiện</span>
+                }
+            </dd>
+
+            <dt class="col-sm-2">Thứ tự:</dt>
+            <dd class="col-sm-10">@Html.DisplayFor(model => model.C_Order)</dd>
+
+            <dt class="col-sm-2">Ngày tạo:</dt>
+            <dd class="col-sm-10">@Html.DisplayFor(model => model.InitDate)</dd>
+        </dl>
+
+        <div class="mt-3">
+            <a href="@Url.Action("Edit", new { id = Model.id })" class="btn btn-primary">
+                <i class="fas fa-edit"></i> Chỉnh sửa
+            </a>
+            <a href="@Url.Action("Index")" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i> Quay lại
+            </a>
+        </div>
+    </div>
+</div>
+

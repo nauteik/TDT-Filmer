@@ -1,0 +1,50 @@
+﻿@model MovieWebsite.Models.News
+
+@{
+    ViewBag.Title = "Xóa Tin tức";
+    Layout = "~/Areas/admin/Views/Shared/adminLayout.cshtml";
+}
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Xác nhận xóa Tin tức</h6>
+    </div>
+    <div class="card-body">
+        <div class="alert alert-danger">
+            Bạn có chắc chắn muốn xóa tin tức này?
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <img src="~/Content/images/uploads/@Model.Image" 
+                     class="img-fluid" 
+                     onerror="this.src='/Content/images/uploads/default.jpg'" />
+            </div>
+            <div class="col-md-8">
+                <dl class="row">
+                    <dt class="col-sm-3">Tiêu đề:</dt>
+                    <dd class="col-sm-9">@Model.Title</dd>
+
+                    <dt class="col-sm-3">Trạng thái:</dt>
+                    <dd class="col-sm-9">@(Model.Hide == true ? "Ẩn" : "Hiện")</dd>
+
+                    <dt class="col-sm-3">Ngày tạo:</dt>
+                    <dd class="col-sm-9">@Model.InitDate?.ToString("dd/MM/yyyy HH:mm")</dd>
+                </dl>
+            </div>
+        </div>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div class="mt-4">
+                <button type="submit" class="btn btn-danger">
+                    <i class="fas fa-trash"></i> Xác nhận xóa
+                </button>
+                <a href="@Url.Action("Index")" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Quay lại
+                </a>
+            </div>
+        }
+    </div>
+</div>

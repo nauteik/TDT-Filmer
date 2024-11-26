@@ -129,12 +129,12 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Title" Type="nvarchar" MaxLength="255" />
           <Property Name="Image" Type="varchar" MaxLength="255" />
-          <Property Name="Content" Type="text" />
+          <Property Name="Content" Type="nvarchar(max)" />
+          <Property Name="Wallpaper" Type="varchar" MaxLength="255" />
           <Property Name="Meta" Type="varchar" MaxLength="255" />
           <Property Name="Hide" Type="bit" />
           <Property Name="_ORDER" Type="int" />
           <Property Name="InitDate" Type="datetime" />
-          <Property Name="Wallpaper" Type="varchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="SubMenu">
           <Key>
@@ -161,6 +161,7 @@
           <Property Name="FirstName" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="LastName" Type="nvarchar" MaxLength="255" />
           <Property Name="Country" Type="nvarchar" MaxLength="255" />
+          <Property Name="Role" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Meta" Type="varchar" MaxLength="255" />
           <Property Name="Hide" Type="bit" />
           <Property Name="_ORDER" Type="int" />
@@ -222,7 +223,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__MovieRevi__Movie__693CA210">
+        <Association Name="FK__MovieRevi__Movie__1DB06A4F">
           <End Role="Movie" Type="Self.Movie" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -236,7 +237,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__MovieRevi__UserI__6A30C649">
+        <Association Name="FK__MovieRevi__UserI__1EA48E88">
           <End Role="Users" Type="Self.Users" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -250,7 +251,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__NewCommen__InitD__6FE99F9F">
+        <Association Name="FK__NewCommen__InitD__2180FB33">
           <End Role="News" Type="Self.News" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
@@ -264,7 +265,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__NewCommen__InitD__7B5B524B">
+        <Association Name="FK__NewCommen__InitD__25518C17">
           <End Role="NewComment" Type="Self.NewComment" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
@@ -278,7 +279,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__NewCommen__UserI__70DDC3D8">
+        <Association Name="FK__NewCommen__UserI__22751F6C">
           <End Role="Users" Type="Self.Users" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
@@ -292,7 +293,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__NewCommen__UserI__7C4F7684">
+        <Association Name="FK__NewCommen__UserI__2645B050">
           <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
           <End Role="NewCommentReply" Type="Self.NewCommentReply" Multiplicity="*" />
           <ReferentialConstraint>
@@ -345,27 +346,27 @@
             <End Role="Movie" EntitySet="Movie" />
             <End Role="MovieGenre" EntitySet="MovieGenre" />
           </AssociationSet>
-          <AssociationSet Name="FK__MovieRevi__Movie__693CA210" Association="Self.FK__MovieRevi__Movie__693CA210">
+          <AssociationSet Name="FK__MovieRevi__Movie__1DB06A4F" Association="Self.FK__MovieRevi__Movie__1DB06A4F">
             <End Role="Movie" EntitySet="Movie" />
             <End Role="MovieReview" EntitySet="MovieReview" />
           </AssociationSet>
-          <AssociationSet Name="FK__MovieRevi__UserI__6A30C649" Association="Self.FK__MovieRevi__UserI__6A30C649">
+          <AssociationSet Name="FK__MovieRevi__UserI__1EA48E88" Association="Self.FK__MovieRevi__UserI__1EA48E88">
             <End Role="Users" EntitySet="Users" />
             <End Role="MovieReview" EntitySet="MovieReview" />
           </AssociationSet>
-          <AssociationSet Name="FK__NewCommen__InitD__6FE99F9F" Association="Self.FK__NewCommen__InitD__6FE99F9F">
+          <AssociationSet Name="FK__NewCommen__InitD__2180FB33" Association="Self.FK__NewCommen__InitD__2180FB33">
             <End Role="News" EntitySet="News" />
             <End Role="NewComment" EntitySet="NewComment" />
           </AssociationSet>
-          <AssociationSet Name="FK__NewCommen__InitD__7B5B524B" Association="Self.FK__NewCommen__InitD__7B5B524B">
+          <AssociationSet Name="FK__NewCommen__InitD__25518C17" Association="Self.FK__NewCommen__InitD__25518C17">
             <End Role="NewComment" EntitySet="NewComment" />
             <End Role="NewCommentReply" EntitySet="NewCommentReply" />
           </AssociationSet>
-          <AssociationSet Name="FK__NewCommen__UserI__70DDC3D8" Association="Self.FK__NewCommen__UserI__70DDC3D8">
+          <AssociationSet Name="FK__NewCommen__UserI__22751F6C" Association="Self.FK__NewCommen__UserI__22751F6C">
             <End Role="Users" EntitySet="Users" />
             <End Role="NewComment" EntitySet="NewComment" />
           </AssociationSet>
-          <AssociationSet Name="FK__NewCommen__UserI__7C4F7684" Association="Self.FK__NewCommen__UserI__7C4F7684">
+          <AssociationSet Name="FK__NewCommen__UserI__2645B050" Association="Self.FK__NewCommen__UserI__2645B050">
             <End Role="Users" EntitySet="Users" />
             <End Role="NewCommentReply" EntitySet="NewCommentReply" />
           </AssociationSet>
@@ -492,7 +493,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Title" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Image" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Meta" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Hide" Type="Boolean" />
           <Property Name="C_ORDER" Type="Int32" />
@@ -574,6 +575,7 @@
           <NavigationProperty Name="MovieReviews" Relationship="MovieWebsiteModel.FK__MovieRevi__UserI__6A30C649" FromRole="User" ToRole="MovieReview" />
           <NavigationProperty Name="NewComments" Relationship="MovieWebsiteModel.FK__NewCommen__UserI__70DDC3D8" FromRole="User" ToRole="NewComment" />
           <NavigationProperty Name="NewCommentReplies" Relationship="MovieWebsiteModel.FK__NewCommen__UserI__7C4F7684" FromRole="User" ToRole="NewCommentReply" />
+          <Property Name="Role" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="MovieReview">
           <Key>
@@ -835,6 +837,7 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="MovieWebsiteModel.User">
               <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Role" ColumnName="Role" />
                 <ScalarProperty Name="InitDate" ColumnName="InitDate" />
                 <ScalarProperty Name="C_ORDER" ColumnName="_ORDER" />
                 <ScalarProperty Name="Hide" ColumnName="Hide" />

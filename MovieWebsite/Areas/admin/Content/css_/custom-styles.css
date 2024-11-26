@@ -1,0 +1,5 @@
+.bg-gradient-dark-custom {
+    background-color: #000000;
+    background-image: linear-gradient(180deg, #404657 10%, #424b65 100%);
+    background-size: cover;
+}

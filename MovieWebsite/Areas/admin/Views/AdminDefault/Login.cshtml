@@ -1,0 +1,103 @@
+﻿@model MovieWebsite.Areas.admin.Models.AdminLogin
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Admin Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: #f8f9fa;
+        }
+        .login-container {
+            max-width: 400px;
+            margin: 100px auto;
+        }
+        .card {
+            border: none;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        .card-header {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            border: none;
+        }
+        .btn-login {
+            background: #2c3e50;
+            color: white;
+            width: 100%;
+        }
+        .btn-login:hover {
+            background: #34495e;
+            color: white;
+        }
+        .input-group-text {
+            background: transparent;
+        }
+        .btn-login:disabled {
+            background: #34495e;
+            cursor: not-allowed;
+            opacity: 0.8;
+        }
+        .spinner-border {
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+    <div class="container login-container">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="mb-0"><i class="fas fa-user-shield me-2"></i>Admin Login</h4>
+            </div>
+            <div class="card-body p-4">
+                @using (Html.BeginForm("Login", "AdminDefault", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+
+                    
+
+                    <div class="mb-3">
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-user"></i></span>
+                            @Html.TextBoxFor(m => m.Username, new { @class = "form-control", placeholder = "Username" })
+                        </div>
+                        @Html.ValidationMessageFor(m => m.Username, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="mb-4">
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Password" })
+                        </div>
+                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                    </div>
+                    if (!ViewData.ModelState.IsValid)
+                    {
+                        <div class="alert alert-danger">
+                            @Html.ValidationSummary(true)
+                        </div>
+                    }
+                    <button type="submit" class="btn btn-login" id="loginButton">
+                        <i class="fas fa-sign-in-alt me-2"></i>Login
+                    </button>
+                }
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Areas/admin/Content/js/login.js"></script>
+</body>
+</html>

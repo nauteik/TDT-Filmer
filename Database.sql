@@ -108,12 +108,16 @@ CREATE TABLE Users
 	FirstName NVARCHAR(255) NOT NULL,
 	LastName NVARCHAR(255),
 	Country NVARCHAR(255),
-	
+	Role NVARCHAR(100) NOT NULL DEFAULT 'User',
 	Meta VARCHAR(255),
 	Hide BIT,
 	_ORDER INT,
 	InitDate DATETIME
 )
+DROP TABLE Users
+DROP TABLE MovieReview
+DROP TABLE NewComment
+DROP TABLE NewCommentReply
 SELECT * From NEWS
 CREATE TABLE MovieReview
 (
@@ -160,10 +164,10 @@ CREATE TABLE NewCommentReply
     FOREIGN KEY (UserId) REFERENCES Users(Id)
 )
 
-
-INSERT INTO Users(Username, Password, Email, Avatar, FirstName, LastName, Country) VALUES
-('tuankiet106', '123', 'letuankiet123@gmail.com', 'userava2.jpg', N'Kiệt', N'Lê', N'Việt Nam'),
-('tuankiet', '123', 'letuankiet@gmail.com', 'userava3.jpg', N'Tân', N'Phạm', N'Việt Nam')
+SELECT * From Users
+INSERT INTO Users(Username, Password, Email, Avatar, FirstName, LastName, Country, Role) VALUES
+('tuankiet106', '123', 'letuankiet123@gmail.com', 'userava2.jpg', N'Kiệt', N'Lê', N'Việt Nam', 'User'),
+('tuankiet', '123', 'letuankiet@gmail.com', 'userava3.jpg', N'Tân', N'Phạm', N'Việt Nam', 'Staff')
 INSERT INTO MovieReview(MovieId, UserId, Score, InitDate, Content) VALUES
 (1, 1, 8, '2024-10-28', N'This is by far one of my favorite movies from the MCU. The introduction of new Characters both good and bad also makes the movie more exciting. giving the characters more of a back story can also help audiences relate more to different characters better, and it connects a bond between the audience and actors or characters. Having seen the movie three times does not bother me here as it is as thrilling and exciting every time I am watching it. In other words, the movie is by far better than previous movies (and I do love everything Marvel), the plotting is splendid (they really do out do themselves in each film, there are no problems watching it more than once.'),
 (1, 2, 9, '2024-10-28', N'I can''t right much... it''s just so forgettable...Okay, from what I remember, I remember just sitting down on my seat and waiting for the movie to begin. 5 minutes into the movie, boring scene of Tony Stark just talking to his "dead" friends saying it''s his fault. 10 minutes in: Boring scene of Ultron and Jarvis having robot space battles(I dunno:/). 15 minutes in: I leave the theatre.2nd attempt at watching it: I fall asleep. What woke me up is the next movie on Netflix when the movie was over.')
@@ -229,4 +233,5 @@ INSERT INTO NewCommentReply(NewCommentId, UserId, Content, InitDate) VALUES
 (1, 1, N'Prince died not long after the 2016 Rock Hall ceremony, so this year''s edition featured Lenny Kravitz and a full gospel choir performing a swamp-funk take on When Doves Cry.', GETDATE()),
 (1, 2, N'Blue Sky Studios is one of the world’s leading digital animation movie studios and we are proud of their commitment to stay and grow in Connecticut.', GETDATE())
 
-SELECT * From Users
+UPDATE FROM News
+SET 

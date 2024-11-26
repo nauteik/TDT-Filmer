@@ -26,7 +26,7 @@
                     <h1>@Model.Title</h1>
                     <span style="font-size: 15px;" class="time">@Model.InitDate.Value.ToString("d MMM yyyy")</span>
                     <img style="display: block;margin: 30px auto;" src="/Content/images/uploads/@Model.Wallpaper" alt="">
-                    <p>@Model.Content</p>
+                    <p>@Html.Raw(Model.Content)</p>
                     <!-- share link -->
                     <div class="flex-it share-tag">
                         <div class="social-link">
@@ -63,7 +63,7 @@
                             foreach (var reply in comment.NewCommentReplies)
                             {
                                 <div class="cmt-item flex-it reply">
-                                    <img src="/Content/images/uploads/@reply.User.Avatar" alt="">
+                                    <img src="/Content/images/uploads/@reply.User.Avatar" alt="" style="width: 40px; height: 40px;">
                                     <div class="author-infor">
                                         <div class="flex-it2">
                                             <h6><a href="#">@($"{reply.User.FirstName} {reply.User.LastName}")</a></h6> <span class="time"> - 27 Mar 2017</span>

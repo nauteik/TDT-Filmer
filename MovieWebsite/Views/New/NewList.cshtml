@@ -33,11 +33,11 @@
                     {
                         <div class="col-md-4 col-sm-12 col-xs-12">
                             <div class="blog-item-style-2">
-                                <a href="/new/@new_obj.Meta"><img src="/Content/images/uploads/@new_obj.Wallpaper" alt=""></a>
+                                <a href="/new/@new_obj.Meta"><img src="~/Content/images/uploads/@new_obj.Wallpaper" alt=""></a>
                                 <div class="blog-it-infor">
                                     <h3><a href="/new/@new_obj.Meta">@new_obj.Title</a></h3>
                                     <span class="time">@new_obj.InitDate.Value.ToString("d MMM yyyy")</span>
-                                    <p class="new-content">@new_obj.Content<p>
+                                    <p class="new-content">@Html.Raw(new_obj.Content)<p>
                                 </div>
                             </div>
                         </div>

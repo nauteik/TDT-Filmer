@@ -1,0 +1,179 @@
+﻿@model MovieWebsite.Models.Movie
+
+@{
+    ViewBag.Title = "Chi tiết Phim";
+    Layout = "~/Areas/admin/Views/Shared/adminLayout.cshtml";
+}
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Chi tiết Phim</h6>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="~/Content/images/uploads/@Model.Wallpaper"
+                         class="card-img-top img-fluid"
+                         style="object-fit: cover; height: 261px; width: 170px;"
+                         onerror="this.src='/Content/images/uploads/movies/default.jpg'"
+                         alt="@Model.Name" />
+                    <div class="card-body">
+                        <h5 class="card-title">Thông tin cơ bản</h5>
+                        <p class="card-text">
+                            <span class="badge @(Model.Hide == true ? "badge-danger" : "badge-success")">
+                                @(Model.Hide == true ? "Đang ẩn" : "Đang hiện")
+                            </span>
+                            @if (Model.Score.HasValue)
+                            {
+                                <span class="badge badge-warning">
+                                    <i class="fas fa-star"></i> @Model.Score
+                                </span>
+                            }
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-8">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Thông tin chi tiết</h5>
+                        <dl class="row">
+                            <dt class="col-sm-3">Tên phim:</dt>
+                            <dd class="col-sm-9">@Model.Name</dd>
+
+                            <dt class="col-sm-3">Thể loại:</dt>
+                            <dd class="col-sm-9">
+                                @foreach (var genre in Model.Genres)
+                                {
+                                    <span class="badge badge-info mr-1">@genre.Name</span>
+                                }
+                            </dd>
+
+                            <dt class="col-sm-3">Loại phim:</dt>
+                            <dd class="col-sm-9">@Model.Type</dd>
+
+                            <dt class="col-sm-3">Thời lượng:</dt>
+                            <dd class="col-sm-9">@(Model.RunTime.HasValue ? $"{Model.RunTime} phút" : "Chưa cập nhật")</dd>
+
+                            <dt class="col-sm-3">Ngày phát hành:</dt>
+                            <dd class="col-sm-9">
+                                @(Model.ReleaseDate.HasValue ? Model.ReleaseDate.Value.ToString("dd/MM/yyyy") : "Chưa cập nhật")
+                            </dd>
+
+                            <dt class="col-sm-3">Meta URL:</dt>
+                            <dd class="col-sm-9">@Model.Meta</dd>
+
+                            <dt class="col-sm-3">Thứ tự:</dt>
+                            <dd class="col-sm-9">@Model.C_ORDER</dd>
+
+                            <dt class="col-sm-3">Ngày tạo:</dt>
+                            <dd class="col-sm-9">@Model.InitDate.Value.ToString("dd/MM/yyyy HH:mm")</dd>
+                        </dl>
+                    </div>
+                </div>
+
+                @if (Model.MovieCasts.Any())
+                {
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Diễn viên</h5>
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Tên</th>
+                                            <th>Vai trò</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var cast in Model.MovieCasts)
+                                        {
+                                            <tr>
+                                                <td>@cast.Celebrity.Name</td>
+                                                <td>@cast.Role</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+                @if (!string.IsNullOrEmpty(Model.Trailer))
+                {
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Trailer</h5>
+                            <div class="embed-responsive embed-responsive-16by9">
+                                <iframe class="embed-responsive-item"
+                                        src="@Model.Trailer"
+                                        allowfullscreen></iframe>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Tóm tắt</h5>
+                        <div class="card-text">
+                            @Html.Raw(Model.Summary)
+                        </div>
+                    </div>
+                </div>
+
+                @if (Model.MovieReviews.Any())
+                {
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Đánh giá gần đây</h5>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Người dùng</th>
+                                            <th>Điểm</th>
+                                            <th>Nội dung</th>
+                                            <th>Ngày đánh giá</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var review in Model.MovieReviews.OrderByDescending(r => r.InitDate).Take(5))
+                                        {
+                                            <tr>
+                                                <td>@review.User.Username</td>
+                                                <td>
+                                                    @if (review.Score.HasValue)
+                                                    {
+                                                        <span class="badge badge-warning">
+                                                            <i class="fas fa-star"></i> @review.Score
+                                                        </span>
+                                                    }
+                                                </td>
+                                                <td>@review.Content</td>
+                                                <td>@review.InitDate.Value.ToString("dd/MM/yyyy HH:mm")</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <div class="mt-4">
+            <a href="@Url.Action("Edit", new { id = Model.Id })" class="btn btn-warning">
+                <i class="fas fa-edit"></i> Chỉnh sửa
+            </a>
+            <a href="@Url.Action("Index")" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i> Quay lại
+            </a>
+        </div>
+    </div>
+</div>
+

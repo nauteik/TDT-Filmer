@@ -50,14 +50,35 @@ $(document).ready(function () {
     $(document).on("click", "#logoutBtn", function (e) {
         e.preventDefault();
         
-        $.ajax({
-            url: "/Account/Logout",
-            type: "POST",
-            success: function (response) {
-                if (response.success) {
-                    // Reload page after successful logout
-                    window.location.reload();
-                }
+        // Show confirmation dialog using SweetAlert2
+        Swal.fire({
+            title: 'Chắc chắn?',
+            text: "Bạn đang đăng xuất khỏi tài khoản",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#DD6B55',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Đăng xuất',
+            cancelButtonText: 'Hủy'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Proceed with logout
+                $.ajax({
+                    url: "/Account/Logout",
+                    type: "POST",
+                    success: function(response) {
+                        if (response.success) {
+                            toastr.success('Đăng xuất thành công');
+                            // Redirect sau 
+                            window.location.href = '/';
+                        } else {
+                            toastr.error('Đăng xuất thất bại');
+                        }
+                    },
+                    error: function() {
+                        toastr.error('Đã xảy ra lỗi khi đăng xuất');
+                    }
+                });
             }
         });
     });

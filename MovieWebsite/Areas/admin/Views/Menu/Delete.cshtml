@@ -1,0 +1,50 @@
+﻿@model MovieWebsite.Models.Menu
+@{
+    ViewBag.Title = "Xóa Menu";
+    Layout = "~/Areas/admin/Views/Shared/adminLayout.cshtml";
+}
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Xác nhận xóa Menu</h6>
+    </div>
+    <div class="card-body">
+        <div class="alert alert-danger">
+            Bạn có chắc chắn muốn xóa menu này?
+        </div>
+
+        <dl class="row">
+            <dt class="col-sm-2">Tên menu:</dt>
+            <dd class="col-sm-10">@Html.DisplayFor(model => model.Name)</dd>
+
+            <dt class="col-sm-2">Đường dẫn:</dt>
+            <dd class="col-sm-10">@Html.DisplayFor(model => model.Link)</dd>
+
+            <dt class="col-sm-2">Meta:</dt>
+            <dd class="col-sm-10">@Html.DisplayFor(model => model.Meta)</dd>
+
+            <dt class="col-sm-2">Trạng thái:</dt>
+            <dd class="col-sm-10">@(Model.Hide == true ? "Ẩn" : "Hiện")</dd>
+
+            <dt class="col-sm-2">Thứ tự:</dt>
+            <dd class="col-sm-10">@Html.DisplayFor(model => model.C_Order)</dd>
+
+            <dt class="col-sm-2">Ngày tạo:</dt>
+            <dd class="col-sm-10">@Html.DisplayFor(model => model.InitDate)</dd>
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-actions no-color">
+                <button type="submit" class="btn btn-danger">
+                    <i class="fas fa-trash"></i> Xác nhận xóa
+                </button>
+                <a href="@Url.Action("Index")" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Quay lại
+                </a>
+            </div>
+        }
+    </div>
+</div>
+

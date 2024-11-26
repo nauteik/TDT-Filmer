@@ -1,0 +1,94 @@
+﻿@model IEnumerable<MovieWebsite.Models.News>
+@{
+    ViewBag.Title = "Quản lý Tin tức";
+    Layout = "~/Areas/admin/Views/Shared/adminLayout.cshtml";
+}
+
+@section _header {
+    <link href="~/Areas/admin/Content/vendor_/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+}
+
+<div class="container-fluid">
+    <h1 class="h3 mb-2 text-gray-800">Quản lý Tin tức</h1>
+
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <a href="@Url.Action("Create")" class="btn btn-primary">
+                <i class="fas fa-plus"></i> Thêm mới
+            </a>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Tiêu đề</th>
+                            <th>Hình ảnh</th>
+                            <th>Ngày tạo</th>
+                            <th>Ẩn</th>
+                            <th>Thứ tự</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{ int stt = 1; }
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@stt</td>
+                                <td>@item.Title</td>
+                                <td>
+                                    <img src="~/Content/images/uploads/@item.Image" 
+                                         style="max-height: 50px;"
+                                         onerror="this.src='/Content/images/uploads/default.jpg'" />
+                                </td>
+                                <td>@(item.InitDate?.ToString("dd/MM/yyyy"))</td>
+                                <td>@(item.Hide == true ? "Có" : "Không")</td>
+                                <td>@item.C_ORDER</td>
+                                <td>
+                                    <a href="@Url.Action("Edit", new { id = item.Id })" class="btn btn-warning btn-sm">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a href="@Url.Action("Details", new { id = item.Id })" class="btn btn-info btn-sm">
+                                        <i class="fas fa-info-circle"></i>
+                                    </a>
+                                    <a href="@Url.Action("Delete", new { id = item.Id })" class="btn btn-danger btn-sm">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            stt++;
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section _footer {
+    <script src="~/Areas/admin/Content/vendor_/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/Areas/admin/Content/vendor_/datatables/dataTables.bootstrap4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#dataTable').DataTable({
+                responsive: true,
+                "language": {
+                    "lengthMenu": "Hiển thị _MENU_ dòng",
+                    "zeroRecords": "Không tìm thấy dữ liệu",
+                    "info": "Hiển thị trang _PAGE_ của _PAGES_",
+                    "infoEmpty": "Không có dữ liệu",
+                    "infoFiltered": "(lọc từ _MAX_ dòng)",
+                    "search": "Tìm kiếm:",
+                    "paginate": {
+                        "first": "Đầu",
+                        "last": "Cuối",
+                        "next": "Sau",
+                        "previous": "Trước"
+                    }
+                }
+            });
+        });
+    </script>
+}

@@ -1,0 +1,109 @@
+﻿@model MovieWebsite.Models.News
+
+@{
+    ViewBag.Title = "Thêm mới Tin tức";
+    Layout = "~/Areas/admin/Views/Shared/adminLayout.cshtml";
+}
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Thêm mới Tin tức</h6>
+    </div>
+    <div class="card-body">
+        @using (Html.BeginForm("Create", "New", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.Title, "Tiêu đề", new { @class = "col-sm-2 col-form-label" })
+                    <div class="col-sm-10">
+                        @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.Meta, "Meta", new { @class = "col-sm-2 col-form-label" })
+                    <div class="col-sm-10">
+                        @Html.EditorFor(model => model.Meta, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                        @Html.ValidationMessageFor(model => model.Meta, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+               
+
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Hình ảnh</label>
+                    <div class="col-sm-10">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <input type="file" name="imageFile" class="form-control-file" accept="image/*" required />
+                            </div>
+                            <div class="col-md-4">
+                                <img src="/Content/images/uploads/default.jpg" 
+                                     class="img-fluid preview-image" 
+                                     style="max-height: 150px;" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.Content, "Nội dung", new { @class = "col-sm-2 col-form-label" })
+                    <div class="col-sm-10">
+                        @Html.TextAreaFor(model => model.Content, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.Hide, "Trạng thái", new { @class = "col-sm-2 col-form-label" })
+                    <div class="col-sm-10">
+                        <div class="form-check form-check-inline">
+                            @Html.RadioButtonFor(model => model.Hide, false, new { @class = "form-check-input", id = "hideShow", @checked = "checked" })
+                            <label class="form-check-label" for="hideShow">Hiện</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            @Html.RadioButtonFor(model => model.Hide, true, new { @class = "form-check-input", id = "hideHide", @disabled = "disabled" })
+                            <label class="form-check-label" for="hideHide">Ẩn</label>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Hide, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.C_ORDER, "Thứ tự", new { @class = "col-sm-2 col-form-label" })
+                    <div class="col-sm-10">
+                        @Html.EditorFor(model => model.C_ORDER, new { htmlAttributes = new { @class = "form-control", type = "number" } })
+                        @Html.ValidationMessageFor(model => model.C_ORDER, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-sm-10 offset-sm-2">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Lưu
+                        </button>
+                        <a href="@Url.Action("Index")" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left"></i> Quay lại
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section _footer {
+    <script src="~/Areas/admin/Content/ckfinder/ckfinder.js"></script>
+    <script src="~/Areas/admin/Content/ckeditor/ckeditor.js"></script>
+    <script>
+        var editor = CKEDITOR.replace('Content', {
+            customConfig: '/Areas/admin/Content/ckeditor/config.js'
+        });
+        CKFinder.setupCKEditor(editor);
+    </script>
+    <script src="~/Areas/admin/Content/js_/new.js"></script>
+}

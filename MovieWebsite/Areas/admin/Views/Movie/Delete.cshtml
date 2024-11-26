@@ -1,0 +1,64 @@
+﻿@model MovieWebsite.Models.Movie
+
+@{
+    ViewBag.Title = "Xóa Phim";
+    Layout = "~/Areas/admin/Views/Shared/adminLayout.cshtml";
+}
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Xác nhận xóa Phim</h6>
+    </div>
+    <div class="card-body">
+        <div class="alert alert-danger">
+            Bạn có chắc chắn muốn xóa phim này?
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <img src="~/Content/images/uploads/@Model.Wallpaper" 
+                     class="img-fluid" 
+                     onerror="this.src='/Content/images/uploads/default.jpg'" />
+            </div>
+            <div class="col-md-8">
+                <dl class="row">
+                    <dt class="col-sm-3">Tên phim:</dt>
+                    <dd class="col-sm-9">@Model.Name</dd>
+
+                    <dt class="col-sm-3">Thể loại:</dt>
+                    <dd class="col-sm-9">
+                        @foreach (var genre in Model.Genres)
+                        {
+                            <span class="badge badge-info mr-1">@genre.Name</span>
+                        }
+                    </dd>
+
+                    <dt class="col-sm-3">Điểm:</dt>
+                    <dd class="col-sm-9">@Model.Score</dd>
+
+                    <dt class="col-sm-3">Trạng thái:</dt>
+                    <dd class="col-sm-9">@(Model.Hide == true ? "Ẩn" : "Hiện")</dd>
+
+                    <dt class="col-sm-3">Ngày tạo:</dt>
+                    <dd class="col-sm-9">
+                        @(Model.InitDate.HasValue ? Model.InitDate.Value.ToString("dd/MM/yyyy HH:mm") : "")
+                    </dd>
+                </dl>
+            </div>
+        </div>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div class="mt-4">
+                <button type="submit" class="btn btn-danger">
+                    <i class="fas fa-trash"></i> Xác nhận xóa
+                </button>
+                <a href="@Url.Action("Index")" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Quay lại
+                </a>
+            </div>
+        }
+    </div>
+</div>
+
